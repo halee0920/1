@@ -13,7 +13,7 @@
   --tip:#456a30; --tip-soft:#eaf4e3;
   --team:#6a3fa0; --team-soft:#f0e9f9;
   --warn:#7a5200; --warn-soft:#fff3d1;
-  --stop:#a8261b; --ok:#12703f;
+  --ok:#12703f; --ok-soft:#e3f4ea;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -24,7 +24,7 @@
     --tip:#a5d48a; --tip-soft:#22301b;
     --team:#c9a6f5; --team-soft:#2c2140;
     --warn:#ffd277; --warn-soft:#3a2f12;
-    --stop:#ff9d92; --ok:#6fd49c;
+    --ok:#6fd49c; --ok-soft:#18301f;
   }
 }
 *{box-sizing:border-box}
@@ -39,7 +39,7 @@ h3{font-size:15px;margin:0 0 6px}
 .sub{color:var(--mute);font-size:13px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
 .row{display:flex;gap:10px;flex-wrap:wrap}
-.row>*{flex:1 1 200px}
+.row>*{flex:1 1 220px}
 label.f{display:block;font-size:13px;color:var(--mute)}
 input[type=text],input[type=date],select,textarea{
   width:100%;font:inherit;color:inherit;background:var(--card);
@@ -51,9 +51,12 @@ button{font:inherit;cursor:pointer}
 .btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0b1220}}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.tabs{display:flex;gap:6px;margin:14px 0 0;border-bottom:2px solid var(--line)}
-.tab{border:0;background:none;color:var(--mute);padding:9px 16px;border-bottom:3px solid transparent;margin-bottom:-2px;font-weight:600}
+.topbar{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;margin:12px 0 0;border-bottom:2px solid var(--line);overflow-x:auto}
+.tab{border:0;background:none;color:var(--mute);padding:9px 14px;border-bottom:3px solid transparent;margin-bottom:-2px;font-weight:600;white-space:nowrap}
 .tab[aria-selected=true]{color:var(--brand);border-bottom-color:var(--brand)}
+.tab .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--line);margin-left:6px}
+.tab .dot.ok{background:var(--ok)}
 .legend{display:flex;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);align-items:center}
 .chip{display:inline-block;font-size:11.5px;font-weight:700;border-radius:4px;padding:1px 7px;white-space:nowrap}
 .chip.law{background:var(--law-soft);color:var(--law)}
@@ -63,20 +66,36 @@ button{font:inherit;cursor:pointer}
 .chip.cond{background:var(--warn-soft);color:var(--warn)}
 .chip.proof{background:transparent;color:var(--mute);border:1px solid var(--line);font-weight:500}
 .note{font-size:13px;background:var(--warn-soft);color:var(--warn);border-radius:6px;padding:7px 10px;margin-top:8px}
-.stopbox{background:var(--law-soft);color:var(--law);border:1px solid var(--law);border-radius:8px;padding:10px 12px;font-weight:600}
-.q{border-top:1px solid var(--line);padding:12px 0}
-.q:first-of-type{border-top:0}
+.intro{border-left:4px solid var(--brand);background:var(--brand-soft);border-radius:6px;padding:10px 14px;margin:12px 0;font-size:14px}
+.intro b{color:var(--brand)}
+.flow{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px;margin-top:8px}
+.flow span{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 10px}
+.flow span.on{border-color:var(--brand);color:var(--brand);font-weight:700}
+.flow i{font-style:normal;color:var(--mute)}
+.q{border-top:1px solid var(--line);padding:14px 0}
+.q:first-of-type{border-top:0;padding-top:4px}
 .q .qt{font-weight:600}
-.q .qh{font-size:13px;color:var(--mute);margin:2px 0 6px}
+.q .qh{font-size:13px;color:var(--mute);margin:3px 0 6px}
 .q ul{margin:4px 0 6px 18px;padding:0;font-size:13.5px}
-.yn{display:flex;gap:8px}
-.yn label{border:1px solid var(--line);border-radius:6px;padding:5px 16px;cursor:pointer;user-select:none}
+.q.sub1{border-top:1px dashed var(--line);padding:10px 0 10px 12px}
+details{margin:4px 0 8px;font-size:13.5px}
+details summary{cursor:pointer;color:var(--brand);font-size:13px}
+details .dbody{background:var(--bg);border-radius:6px;padding:8px 12px;margin-top:4px}
+details .dbody p{margin:4px 0}
+details .dbody ul{margin:4px 0 4px 18px;padding:0}
+.ref{color:var(--mute);font-size:12.5px}
+.yn{display:flex;gap:8px;flex-wrap:wrap}
+.yn label{border:1px solid var(--line);border-radius:6px;padding:5px 14px;cursor:pointer;user-select:none}
 .yn input{position:absolute;opacity:0;pointer-events:none}
 .yn label:has(input:checked){background:var(--brand);color:#fff;border-color:var(--brand)}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .yn label:has(input:checked){color:#0b1220}}
 .yn label:has(input:focus-visible){outline:2px solid var(--brand);outline-offset:2px}
-.result{border-left:5px solid var(--brand);background:var(--brand-soft);border-radius:6px;padding:10px 14px}
-.result b{font-size:16px}
+.result{border-left:5px solid var(--brand);background:var(--brand-soft);border-radius:6px;padding:12px 16px}
+.result.ok{border-color:var(--ok);background:var(--ok-soft)}
+.result.stop{border-color:var(--law);background:var(--law-soft)}
+.result.warn{border-color:var(--warn);background:var(--warn-soft)}
+.result .rt{font-size:17px;font-weight:700;margin-bottom:4px}
+.result ul{margin:6px 0 6px 18px;padding:0;font-size:14px}
 .bar{height:8px;background:var(--line);border-radius:5px;overflow:hidden;margin-top:8px}
 .bar>i{display:block;height:100%;background:var(--ok);width:0;transition:width .2s}
 .stage{margin-top:18px}
@@ -85,24 +104,19 @@ button{font:inherit;cursor:pointer}
 .item{display:flex;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:7px 0}
 .item.done{opacity:.72}
 .item.done .ttl{text-decoration:line-through;text-decoration-color:var(--mute)}
-.item.exempt{background:transparent;border-style:dashed}
 .item .chkw{padding-top:2px}
 .item input[type=checkbox]{width:20px;height:20px;accent-color:var(--ok);cursor:pointer}
 .item .body{flex:1;min-width:0}
 .ttl{font-weight:600}
 .chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
 .more{background:none;border:0;color:var(--brand);padding:2px 0;margin-top:4px;font-size:13px}
-.detail{display:none;font-size:13.5px;color:var(--ink);margin-top:6px;padding:8px 10px;background:var(--bg);border-radius:6px}
+.detail{display:none;font-size:13.5px;margin-top:6px;padding:8px 10px;background:var(--bg);border-radius:6px}
 .detail.open{display:block}
 .detail ul{margin:4px 0 4px 18px;padding:0}
 .detail p{margin:4px 0}
-.detail .ref{color:var(--mute);font-size:12.5px}
 .na{align-self:flex-start;font-size:12px;padding:3px 8px;white-space:nowrap}
 .na.on{background:var(--mute);color:var(--card)}
-.sched table{border-collapse:collapse;width:100%;font-size:13.5px}
-.sched td,.sched th{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-.sched th{background:var(--bg);width:28%}
-.empty{color:var(--mute);text-align:center;padding:24px}
+.review{background:var(--warn-soft);color:var(--warn);font-size:12.5px;border-radius:4px;padding:4px 8px;margin-top:6px}
 .formcard h3{font-size:16px}
 .ftable{width:100%;border-collapse:collapse;margin:8px 0;font-size:14px}
 .ftable th,.ftable td{border:1px solid var(--mute);padding:6px 8px;vertical-align:top;text-align:left}
@@ -114,16 +128,19 @@ button{font:inherit;cursor:pointer}
 .sign div{flex:1 1 200px;border-top:1px solid var(--mute);padding-top:4px;font-size:13px}
 .clause{white-space:pre-wrap;font-size:13.5px;background:var(--bg);border-radius:6px;padding:12px;border:1px solid var(--line);font-family:inherit}
 footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
-.review{background:var(--warn-soft);color:var(--warn);font-size:12.5px;border-radius:4px;padding:4px 8px;margin-top:6px}
 .hidden{display:none!important}
 @media print{
   body{background:#fff;color:#000;font-size:12px}
   .page{max-width:none;padding:0}
-  .tabs,.toolbar,.noprint,.more,.na,button,.legend{display:none!important}
+  .tabs,.toolbar,.noprint,.more,.na,button,.legend,.yn{display:none!important}
   .detail{display:block!important;background:#fff;border:1px solid #ccc}
+  details .dbody{display:block}
   .card,.item{break-inside:avoid;border-color:#999}
   .item.done{opacity:1}
-  body.printing-form .page>*:not(#panel-forms){display:none!important}
+  body.printing-form .page>*:not(.panel){display:none!important}
+  body.printing-form .page>.panel:not(:has(.print-target)){display:none!important}
+  body.printing-form .panel>*:not(:has(.print-target)):not(.print-target){display:none!important}
+  body.printing-form #s1result>.result{display:none!important}
   body.printing-form .formcard:not(.print-target){display:none!important}
   body.printing-form .formcard{border:0;padding:0}
 }
@@ -132,68 +149,47 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
 <body>
 <div class="page">
 
-<header>
-  <h1>도급사업 안전보건 체크리스트</h1>
-  <div class="sub">국립중앙과학관 「도급사업 안전보건관리」 운영 매뉴얼(2024.9.30.) 기준 · <b>초안 v0.1</b> · 계약 1건당 1회 작성</div>
-</header>
-
-<section class="card" id="info">
-  <h2>1. 계약 정보</h2>
-  <div class="row">
-    <label class="f">사업명<input type="text" id="i_name" placeholder="예) 2026 특별전 전시물 제작·설치"></label>
-    <label class="f">사업담당자(부서·이름)<input type="text" id="i_owner"></label>
-    <label class="f">계약 업체<input type="text" id="i_vendor"></label>
+<header class="topbar">
+  <div>
+    <h1>도급사업 안전보건 체크리스트</h1>
+    <div class="sub">국립중앙과학관 「도급사업 안전보건관리」 운영 매뉴얼(2024.9.30.) 기준 · <b>초안 v0.2</b></div>
   </div>
-  <div class="row" style="margin-top:8px">
-    <label class="f">계약 방법
-      <select id="i_ctype">
-        <option value="">선택</option>
-        <option value="neg">협상에 의한 계약</option>
-        <option value="one">1인 견적 수의계약</option>
-        <option value="two">2인 견적 수의계약</option>
-        <option value="etc">그 밖의 방법(일반경쟁 등)</option>
-      </select>
-    </label>
-    <label class="f">작업 시작일<input type="date" id="i_start"></label>
-    <label class="f">작업 종료일<input type="date" id="i_end"></label>
-  </div>
-  <div class="toolbar noprint">
+  <div class="toolbar noprint" style="margin:0">
     <button class="btn" id="b_save" type="button">파일로 저장</button>
-    <button class="btn" id="b_load" type="button">저장 파일 불러오기</button>
-    <button class="btn" id="b_print" type="button">인쇄 / PDF</button>
+    <button class="btn" id="b_load" type="button">불러오기</button>
     <button class="btn" id="b_reset" type="button">새 계약 시작(초기화)</button>
     <input type="file" id="f_load" accept=".json,application/json" class="hidden">
   </div>
-  <div class="sub noprint" style="margin-top:6px">입력·체크 내용은 이 브라우저에 자동 저장됩니다. 계약마다 「파일로 저장」해 두면 나중에 다시 불러올 수 있습니다.</div>
-</section>
+</header>
+<div class="sub noprint" style="margin-top:4px">체크·선택 내용은 이 브라우저에 자동 저장됩니다. 계약마다 「파일로 저장」해 두면 나중에 다시 불러올 수 있습니다.</div>
 
-<nav class="tabs noprint" role="tablist">
-  <button class="tab" role="tab" id="t_check" aria-selected="true" type="button">체크리스트</button>
-  <button class="tab" role="tab" id="t_forms" aria-selected="false" type="button">양식 모음</button>
-</nav>
+<nav class="tabs noprint" role="tablist" id="tabs"></nav>
 
-<div id="panel-check">
-  <section class="card" id="gate">
-    <h2>2. 분류 질문 <small class="sub">— 답에 따라 해야 할 항목만 나타납니다</small></h2>
-    <div id="gateQs"></div>
-  </section>
-
-  <section class="card" id="summary"></section>
-
-  <section class="card legend noprint" id="legend">
-    <span><span class="chip law">법정</span> 산업안전보건법 등 법령에 근거한 의무(매뉴얼이 법 조항을 인용)</span>
-    <span><span class="chip manual">관 기준</span> 매뉴얼 자체 기준·절차·서식</span>
-    <span><span class="chip tip">권장</span> 매뉴얼 외 추가 제안</span>
-    <span><span class="chip team">시설안전팀</span> 시설안전팀 담당</span>
-    <label style="margin-left:auto"><input type="checkbox" id="coreOnly"> 핵심 항목만 보기(권장·해당 시 항목 숨김)</label>
-  </section>
-
-  <section class="card sched hidden" id="schedBox"></section>
-
-  <div id="list"></div>
+<!-- ===== 1단계: 도급인 확인 ===== -->
+<div class="panel" id="panel-s1">
+  <div class="intro">
+    <b>1단계. 도급인 확인</b> <span class="sub">(매뉴얼 p.4~8)</span><br>
+    이 계약에서 우리 관이 산업안전보건법상 <b>「도급인」</b>인지, <b>「건설공사발주자」</b>인지 판단합니다.
+    도급인이면 산안법의 도급 안전·보건 의무가 적용되고, 건설공사발주자이면 산안법 제67조~제73조에 따른 조치를 추진합니다.
+    <div class="flow" id="s1flow"></div>
+  </div>
+  <section class="card" id="s1qs"></section>
+  <section id="s1result"></section>
+  <div class="sub" style="margin-top:8px">※ 세부 판단기준은 법령·판례·자문자료·행정해석 등을 참조해 작성된 것으로, 구체적인 사안과 관점에 따라 결론이 달라질 수 있습니다(매뉴얼 p.5). 애매하면 시설안전팀과 협의하세요.</div>
 </div>
 
-<div id="panel-forms" class="hidden">
+<!-- ===== 2단계: 적격 수급인 선정 ===== -->
+<div class="panel hidden" id="panel-s2">
+  <div class="intro">
+    <b>2단계. 적격 수급인 선정</b> <span class="sub">(매뉴얼 p.9~10 · 산안법 제61조)</span><br>
+    도급인은 산업재해 예방 조치를 할 수 있는 능력을 갖춘 업체에 도급해야 합니다. <b>업체와 계약하기 전에</b> 아래 순서로 진행합니다.
+    <div class="flow"><span class="on">자료 제시·징구</span><i>→</i><span class="on">최초 안전보건수준평가</span><i>→</i><span class="on">계약(관리비용 계상 등)</span></div>
+  </div>
+  <div id="s2body"></div>
+</div>
+
+<!-- ===== 양식 모음 ===== -->
+<div class="panel hidden" id="panel-forms">
   <section class="card">
     <h2>양식 모음 <small class="sub">— 매뉴얼에 없는 추가 양식(권장)</small></h2>
     <div class="sub">매뉴얼의 서식 1~12는 매뉴얼 원문을 사용하세요. 아래 양식은 현장 업무 편의를 위한 제안 양식입니다. 입력 후 「인쇄 / PDF」로 저장하세요. (입력 내용은 저장되지 않습니다)</div>
@@ -208,7 +204,7 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
 </div>
 
 <footer>
-  근거: 국립중앙과학관 「도급사업 안전보건관리」 운영 매뉴얼(2024.9.30.) 및 안전보건관리규정. 이 체크리스트는 업무 참고용 초안이며, 법령 개정 사항은 최종 확인 전입니다. 문의: 시설안전팀 042-601-7874
+  근거: 국립중앙과학관 「도급사업 안전보건관리」 운영 매뉴얼(2024.9.30.). 업무 참고용 초안이며 법령 개정 사항은 최종 확인 전입니다. 이후 단계(작업 전 안전보건 활동 ~ 재평가·환류)는 순차적으로 추가될 예정입니다. 문의: 시설안전팀 042-601-7874
 </footer>
 </div>
 
@@ -216,234 +212,313 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
 "use strict";
 /* ===== 배포 전에 false 로 바꾸면 '확인 필요' 메모가 모두 사라집니다 ===== */
 const SHOW_REVIEW_NOTES = true;
-
-const KEY = "ncsm-dogeub-checklist-v1";
+const KEY = "ncsm-dogeub-checklist-v2";
 const TYPE_LABEL = {law:"법정", manual:"관 기준", tip:"권장"};
+const $ = id => document.getElementById(id);
 
-/* ---------- 분류 질문 ---------- */
-const QUESTIONS = [
- {id:"q1", t:"이 계약은 업체(수급인)가 우리 관의 업무(전시물 제작·설치, 행사 운영, 용역 등)를 맡아 자기 근로자를 투입해 작업하는 계약인가요?",
-  h:"근로자를 사용하지 않는 개인 위촉 등은 도급이 아닐 수 있습니다(매뉴얼 p.5). 다만 이 경우에도 중대재해처벌법상 의무가 있을 수 있으니 애매하면 시설안전팀에 문의하세요."},
- {id:"q2", t:"도급이 금지되거나 승인이 필요한 작업이 포함되나요?",
-  list:["도금 작업, 수은·납·카드뮴 작업, 허가대상물질 제조·사용 작업(도급 금지)","중량 비율 1% 이상의 황산·불화수소·질산·염화수소를 취급하는 설비 작업 또는 그 설비 내부 작업(승인 필요)"],
-  h:"전시·행사 계약에서는 드뭅니다(매뉴얼 p.4)."},
- {id:"q3", t:"계약 내용이 전부 다음 '제외 업무'에만 해당하나요?",
-  list:["부수적 작업(제품 구매 후 자재·부품 납품·설치·하자보수, 소모품 보충 등)","각종 회의 참석(용역 관련 회의, 설계도면 협의 등)","사업장 내 정수기 설치, 생수 공급 등","안전보건관리대행, 안전보건진단(평가), 컨설팅, 교육·강의","그 밖에 위와 유사한 출입 업체 업무"],
-  h:"하나라도 다른 작업(설치·해체 작업 등)이 섞이면 '아니오'입니다(매뉴얼 p.12, 22)."},
- {id:"q4", t:"다음 위험작업이 하나라도 포함되나요?", skipIf:q=>q.q3==="y",
-  list:["높이 2m 이상 고소작업(무대·트러스·조명·전시물 설치·해체 등)","용접·용단 등 화기작업","밀폐공간 작업","전기 작업(임시 배선 포함)","양중·중량물 취급, 지게차·고소작업대 등 장비 사용","화학물질 취급","굴착·붕괴 우려 작업, 그 밖에 산업재해 발생 위험 장소(시행령 제11조) 작업"],
-  h:"매뉴얼에 위험작업 목록이 따로 없어 참고용으로 정리한 예시입니다. 무대·트러스·전시물 설치·철거는 고소·중량물·전기 작업이 포함되는 경우가 많습니다."},
- {id:"q5", t:"구조물·시설물을 설치·해체·보수하는 공사가 포함되나요?",
-  list:["가설무대, 트러스, 전시 구조물 축조·설치·해체","전기·정보통신·소방 공사, 시설물 보수 공사"],
-  h:"공사 금액이 작아도 구조물을 '축조·설치'하면 건설공사일 수 있습니다(매뉴얼 p.6). 전시물 교체·특별전 조성·전시공간 조성 공사는 우리 관의 본질적 사업이라 '도급인'으로 봅니다(p.7). 해당 시 점검 주기가 건설업 기준(순회점검 2일에 1회, 합동점검 2개월에 1회)으로 바뀝니다."},
- {id:"q6", t:"화학설비 개조·분해·해체·내부 작업, 또는 질식·붕괴 위험 작업이 포함되나요?",
-  h:"해당하면 작업 시작 전에 안전보건 정보를 문서로 제공해야 합니다(매뉴얼 p.13~14, 참고1). 전시·행사에서는 드뭅니다."},
- {id:"q7", t:"작업이 30일 이내에 끝나는 일시적 작업이거나, 연간 총 작업일수가 60일 이하인 간헐적 작업인가요?",
-  h:"해당하면 안전보건협의체 구성·운영 예외입니다(매뉴얼 p.12). 나머지 항목은 그대로 적용됩니다."}
+/* ================= 1단계: 도급인 확인 ================= */
+const Y3 = [["y","예"],["n","아니오"],["q","잘 모르겠음"]];
+const S1Q = [
+ {id:"q1", n:"1", t:"이 계약은 우리 관의 업무를 업체에 맡겨 물건의 제조·건설·수리 또는 서비스 제공, 그 밖의 업무를 하게 하는 계약인가요?",
+  h:"계약 명칭과 관계없고, 일의 완성이나 대가 지급 여부와도 관계없습니다.", opts:Y3,
+  det:`<p><b>도급</b>이란 명칭에 관계없이 물건의 제조·건설·수리 또는 서비스의 제공, 그 밖의 업무를 타인에게 맡기는 계약입니다.</p>
+   <ul><li>도급 대상 업무는 모두 도급인(우리 관) 자신의 업무로 봅니다. 사업 목적과 직접 관련이 없어도 도급에 포함됩니다.</li>
+   <li>예) 전시 장치 등 과학관 전시에 관한 정기적·일상적 정비·유지·보수, 경비·조경·청소 등 용역서비스, 구내식당 등 복리후생시설 운영</li></ul>
+   <p class="ref">매뉴얼 p.3, 5</p>`},
+ {id:"q2", n:"2", t:"계약 상대방(업체)은 근로자를 사용해 사업을 하는 사업주인가요?",
+  h:"근로자를 사용하지 않는 개인을 위촉하는 경우(예: 위원회 위원 위촉)는 산안법상 도급으로 보기 어렵습니다.", opts:Y3,
+  det:`<p>산안법상 도급은 수급인이 근로자를 사용하여 사업을 하는 사업주임을 전제로 합니다.</p>
+   <p>도급이 아닌 경우에도 <b>중대재해처벌법 제9조</b>에 따른 안전 및 보건 확보 의무는 있습니다.</p><p class="ref">매뉴얼 p.5</p>`},
+ {id:"q3", n:"3", t:"이 계약에 도급이 금지되거나 승인이 필요한 작업이 포함되나요?", kind:"choice",
+  opts:[["none","해당 없음"],["ban","도급 금지 작업이 포함됨"],["appr","승인 필요 작업이 포함됨"],["q","잘 모르겠음"]],
+  list:["<b>도급 금지</b>: ① 도금 작업 ② 수은·납 또는 카드뮴을 제련·주조·용접·열처리·가공·취급하는 작업 ③ 산안법 제118조 제1항에 따른 허가대상물질 제조·사용 작업",
+        "<b>승인 필요</b>: 중량 비율 1% 이상의 황산·불화수소·질산·염화수소를 취급하는 설비를 작업 또는 해당 설비 내부에서 이뤄지는 작업"],
+  h:"전시·행사 계약에서는 드뭅니다.",
+  rv:"매뉴얼 p.4 흐름도에는 금지 ②가 '수은, 납 또는 카드뮴의 작업'으로만 적혀 있습니다. 위 ② 문구는 법령 표현을 참고해 풀어 쓴 것이므로 법령 확인 시 점검 필요.",
+  det:`<p class="ref">매뉴얼 p.4 (도급 금지·승인 필요 사업 여부 판단)</p>`},
+ {id:"q4", n:"4", t:"이 계약에 건설공사가 포함되나요?",
+  h:"공사 금액이 적거나 규모가 작아도, 구조물을 '축조 또는 설치'하는 작업이면 건설공사에 해당할 수 있습니다.", opts:Y3,
+  rv:"매뉴얼 p.6에 '다만 다음 각 목의 어느 하나에 해당하는 공사는 포함하지 아니한다'는 문구가 있으나 각 목 내용이 매뉴얼에 없습니다. 원문(건설산업기본법 제2조 제4호) 확인 필요.",
+  det:`<p>산안법상 <b>건설공사</b>는 다음 중 어느 하나에 해당하는 공사입니다.</p>
+   <ul><li>건설산업기본법에 따른 <b>건설공사</b></li><li>전기공사업법에 따른 <b>전기공사</b></li><li>정보통신공사업법에 따른 <b>정보통신공사</b></li><li>소방시설공사업법에 따른 <b>소방시설공사</b></li><li>국가유산수리 등에 관한 법률에 따른 <b>국가유산 수리공사</b></li></ul>
+   <p>건설산업기본법상 건설공사: 토목·건축·산업설비·조경·환경시설공사, 그 밖에 명칭과 관계없이 시설물을 설치·유지·보수하는 공사(부지조성공사 포함), 기계설비나 그 밖의 <b>구조물의 설치 및 해체공사</b> 등</p>
+   <ul><li>구조물의 크기·공사 금액 제한이 없습니다(옥외광고탑부터 사다리·난간·계단까지).</li>
+   <li>구조물(기성품)을 단순히 공급받는 것이 아니라 <b>축조 또는 설치</b>하는 작업이 필요합니다.</li>
+   <li>대법원 2015.4.23. 선고 2013두12386: 공사 금액이 적거나 규모가 작아도 건설업 범위에 속한다고 판시</li></ul>
+   <p class="ref">매뉴얼 p.4, 6</p>`}
 ];
-
-/* ---------- 단계 ---------- */
-const STAGES = [
- {id:"s1", t:"계약 준비", s:"품의·예산·과업 작성"},
- {id:"s2", t:"공고·견적 요청", s:"제안요청서·공고문"},
- {id:"s3", t:"업체 선정", s:"안전보건수준 평가"},
- {id:"s4", t:"계약 체결", s:""},
- {id:"s5", t:"착수 전", s:"작업 전 안전·보건 활동"},
- {id:"s6", t:"이행 중", s:"점검·시정·사고 대응"},
- {id:"s7", t:"준공·정산·재평가", s:""}
+const S1C_INTRO = "건설공사가 포함되는 경우, 우리 관이 건설공사의 <b>총괄·관리 지위</b>에 있는지 아래 4개 기준으로 판단합니다. <b>하나라도 '예'이면 「도급인」</b>, 4개 모두 '아니오'이면 「건설공사발주자」입니다. (매뉴얼 p.7~8)";
+const S1C = [
+ {id:"c1", n:"①", t:"도급하는 건설공사가 우리 관 사업의 본질적이고 필수적인 부분에 해당하며, 같은 장소에서 공사 일부는 우리 관이 행하고 나머지 일부는 수급인이 행하나요?",
+  h:"공사를 직접 하지 않더라도 구체적인 지시를 하는 경우 등은 공사를 행한다고 봅니다. 매뉴얼은 전시물 교체공사, 특별전·기획전 조성 공사, 전시기획에 따른 전시공간 조성 공사를 우리 관 주도로 실시하는 본질적·필수적 부분으로 봅니다.", opts:Y3,
+  det:`<p><b>본질적이고 필수적인 부분</b>: 판례(울산지방법원 2021.11.11. 선고 2021고단1782)는 도급인의 주요 생산 기계에 대한 유지·보수 공사처럼 그 건설공사 자체가 도급인 사업의 일부에 해당하는 경우를 본질적·필수적이라고 봤습니다.</p>
+   <p><b>우리 관 사례 적용</b>: 우리 관은 과학기술자료를 수집·조사·연구하여 보존·전시하고 과학기술교육프로그램을 개설해 과학기술지식을 보급하는 시설입니다. 따라서 ① 전시물 교체공사 ② 특별전·기획전 조성 공사 ③ 전시기획에 따른 전시공간 조성 공사 등은 우리 관 주도 하에 실시되어야 하는 본질적·필수적 부분(사업)에 해당합니다.</p><p class="ref">매뉴얼 p.7</p>`},
+ {id:"c2", n:"②", t:"도급하는 건설공사가 각 전문분야 공사로 이루어지며 같은 장소에서 행해지는데, 우리 관이 각 전문분야 공사의 전부를 직접 도급하고 있나요?",
+  h:"최초로 도급받은 수급인(원도급)이 없고, 우리 관이 전문분야별로 각각 직접 계약하는 경우입니다.", opts:Y3,
+  det:`<p class="ref">매뉴얼 p.7</p>`},
+ {id:"c3", n:"③", t:"도급하는 건설공사에 관하여 우리 관의 지배하(실질적으로 지배·운영·관리하는 책임이 있는 경우)에 있는 특수한 위험요소가 있나요?", opts:Y3,
+  det:`<p><b>실질적으로 지배·운영·관리하는 책임이 있는 경우</b>(고용노동부 해설): 재해 원인을 살펴 해당 시설·장비·장소에 관한 소유권, 임차권, 그 밖에 사실상의 지배력을 가지고 있어 위험에 대한 제어 능력이 있다고 볼 수 있는 경우</p>
+   <p><b>판례 속 예시</b>(울산지방법원 2021.11.11. 선고 2021고단1782): 도급한 건설공사의 목적물이 도급인만이 그 위험을 파악하고 적절하게 대처할 수 있는 특수한 위험 설비나 자재가 위치한 공간 내에 있고, 도급인이 주도적으로 시공을 총괄·관리하면서 그 설비나 자재의 폭발, 전도 및 낙하 방지, 근로자 출입 금지 등의 적극적인 조치를 취하지 않고서는 수급인이 독자적으로 그러한 위험을 제거하는 조치를 취하는 것이 불가능한 경우</p><p class="ref">매뉴얼 p.8</p>`},
+ {id:"c4", n:"④", t:"우리 관과 수급인의 전문성·규모·계약 내용 등에 비추어, 우리 관은 시공을 주도해 총괄·관리할 능력이 있는 반면 수급인은 산안법이 정한 안전·보건조치를 스스로 이행할 능력이 없음이 우리 관 입장에서 명백한가요?", opts:Y3,
+  det:`<p><b>판례 속 예시</b>: 스스로 충분히 건설공사 시공을 주도하여 총괄·관리할 수 있는 능력이 있는 대규모 사업체가, 안전조치를 취하는 것이 불가능함이 명백할 정도의 낮은 금액으로 전문성과 안전조치 능력을 갖추지 못했음이 명백한 영세한 사업체와 도급계약을 체결한 경우</p><p class="ref">매뉴얼 p.8</p>`}
 ];
+const S1ALL = [...S1Q, ...S1C];
 
-const who1 = "사업담당자", who2 = "시설안전팀";
+function s1Result(){
+  const a = state.s1;
+  for(const id of ["q1","q2"]){ if(a[id]==="n") return "NOT"; if(a[id]==="q") return "UNSURE"; if(!a[id]) return null; }
+  if(a.q3==="ban") return "BAN"; if(a.q3==="appr") return "APPR"; if(a.q3==="q") return "UNSURE"; if(!a.q3) return null;
+  if(a.q4==="n") return "DOGEUP"; if(a.q4==="q") return "UNSURE"; if(!a.q4) return null;
+  const cs = S1C.map(c=>a[c.id]);
+  if(cs.includes("y")) return "DOGEUP";
+  if(cs.some(v=>!v)) return null;
+  if(cs.includes("q")) return "UNSURE";
+  return "ORDERER";
+}
+function s1Visible(){ /* 어디까지 질문을 보여줄지 */
+  const a = state.s1, vis = ["q1"];
+  const chain = ["q1","q2","q3","q4"];
+  for(let i=0;i<chain.length;i++){
+    const id = chain[i], v = a[id];
+    if(!v) return {vis, c:false};
+    if(id==="q1"||id==="q2"){ if(v!=="y") return {vis, c:false}; }
+    if(id==="q3"){ if(v!=="none") return {vis, c:false}; }
+    if(id==="q4"){ if(v!=="y") return {vis, c:false}; return {vis:[...vis], c:true}; }
+    vis.push(chain[i+1]);
+  }
+  return {vis, c:false};
+}
 
-/* ---------- 항목 ----------
-  tr: 적용 트랙(A 제외업무 / B 일반 도급 / C 위험작업 포함)
-  opt: '해당 없음' 버튼 허용(조건부 항목)   core:false → '핵심만 보기'에서 숨김
-  exemptIf: 질문 id 가 'y' 이면 예외(생략 가능)   showIf: 질문 id 가 'y' 일 때만 표시
-  rv: 확인 필요 메모(초안 검토용)                                              */
-const ITEMS = [
- /* --- S1 --- */
- {id:"i01", st:"s1", who:who1, type:"tip", tr:"BC", core:false,
-  t:"작업 내용·장소·기간·투입 인원·동시 작업 업체를 정리해 과업지시서에 반영",
-  d:()=>`<ul><li>행사·전시: 설치·철거 일정, 야간·휴관일 작업 여부, 관람객 동선과 작업 구역 분리, 같은 장소에 동시에 들어오는 업체</li><li>이 내용이 이후 위험성평가·작업 혼재 조정의 기초가 됩니다.</li></ul>`,
-  proof:"과업지시서", ref:"매뉴얼 외 제안"},
- {id:"i02", st:"s1", who:who1, type:"manual", tr:"BC",
-  t:"안전보건관리 비용을 항목별로 계상(예산·산출내역·계약서에 반영)",
-  d:()=>`<ul><li>총액이 아닌 <b>가급적 항목별</b>로 구체적으로 계상합니다.</li><li>대상: 수급인이 사용하는 시설·설비·장비의 안전·보건 조치 비용, 종사자 개인보호구 등 안전·보건 확보 비용</li></ul>`,
-  proof:"산출내역서", ref:"매뉴얼 p.9"},
+const RESULTS = {
+ DOGEUP:{cls:"ok", t:"결론: 우리 관은 「도급인」입니다", next:true,
+  b:()=>{
+    const a = state.s1, why = [];
+    if(a.q4==="n") why.push("건설공사에 해당하지 않아 「도급인」으로 판단합니다.");
+    else { const hit = S1C.filter(c=>a[c.id]==="y").map(c=>c.n).join(" "); why.push(`건설공사에 해당하나, 총괄·관리 지위 기준 ${hit}에 해당하여 「도급인」으로 판단합니다.`); }
+    return `<ul><li>${why.join("</li><li>")}</li><li>산업안전보건법의 도급인 안전·보건 의무가 적용됩니다.</li></ul>
+    <div class="sub">이어지는 의무(매뉴얼 p.4): 적격 수급인 선정 → 작업 전 안전·보건 활동 → 안전·보건 조치 → 산업재해 예방조치 → 시정조치 → 재평가·환류</div>`; }},
+ ORDERER:{cls:"warn", t:"결론: 우리 관은 「건설공사발주자」입니다", next:false,
+  b:()=>`<ul><li>4개 기준(①~④)에 모두 해당하지 않아 「건설공사발주자」로 판단합니다.</li>
+   <li>산업안전보건법 <b>제67조~제73조</b>에 따른 산업재해 예방조치 등을 추진합니다. (관련: 시행령 제55조~제59조, 시행규칙 제86조~제89조)</li>
+   <li>이 체크리스트의 도급인 절차(2단계 이후)는 적용 대상이 아닙니다. <b>시설안전팀과 협의</b>하세요.</li></ul>`},
+ NOT:{cls:"warn", t:"산안법상 도급에 해당하지 않을 가능성이 있습니다", next:false,
+  b:()=>`<ul><li>도급의 범위는 넓게 해석됩니다(매뉴얼 p.5). 판단이 어려우면 시설안전팀에 문의하세요.</li>
+   <li>도급이 아닌 경우에도 <b>중대재해처벌법 제9조</b>에 따른 안전 및 보건 확보 의무는 있습니다.</li></ul>`},
+ BAN:{cls:"stop", t:"도급이 금지되는 작업이 포함되어 있습니다", next:false,
+  b:()=>`<ul><li>계약을 진행하기 전에 <b>반드시 시설안전팀과 협의</b>하세요(매뉴얼 p.4).</li></ul>`},
+ APPR:{cls:"stop", t:"승인이 필요한 작업이 포함되어 있습니다", next:false,
+  b:()=>`<ul><li>승인 없이 도급할 수 없습니다. 승인 절차는 <b>시설안전팀과 협의</b>하세요(매뉴얼 p.4).</li></ul>`},
+ UNSURE:{cls:"warn", t:"판단이 어려운 항목이 있습니다", next:false,
+  b:()=>`<ul><li>'잘 모르겠음'으로 답한 항목은 <b>시설안전팀과 협의</b>해 결론을 확정하세요.</li><li>확정 후 해당 항목의 답을 바꾸면 결과가 다시 계산됩니다.</li></ul>`}
+};
 
- /* --- S2 --- */
- {id:"i03", st:"s2", who:who1, type:"manual", tr:"BC",
-  t:()=>"계약 방법에 맞게 안전보건수준 평가를 선정 절차에 반영",
-  d:ctx=>{
-    const m={
-     neg:`<p><b>협상에 의한 계약</b></p><ul><li>제안요청서 평가항목(사업수행계획)에 안전보건수준 항목을 넣고 <b>배점 20점 이상 30점 이하</b>로 설정</li><li>제안서평가위원회 심의 시, 제출된 안전보건관리계획서(서식1)로 평가</li><li>점수 반영: 최초 안전수준평가 총점 × (안전보건수준 배점 ÷ 100)</li></ul>`,
-     one:`<p><b>1인 견적 수의계약</b></p><ul><li>계약 전에 업체에 안전보건관리계획서(서식1)를 요구하고, 평가해서 기준에 맞을 때 계약 추진</li></ul>`,
-     two:`<p><b>2인 견적 수의계약</b></p><ul><li>공고 내용상 입찰자격·조건 등에 일정한 안전보건수준을 포함하거나, 도급하는 작업과 관련해 필요한 안전보건 수준을 제시하는 방법으로 이행</li></ul>`,
-     etc:`<p>그 밖의 계약 방법(일반경쟁 등)에 대한 별도 기준은 매뉴얼에 없습니다. <b>시설안전팀과 협의</b>하세요.</p>`
-    };
-    return (ctx.ctype? m[ctx.ctype] : `<p>상단 「계약 방법」을 선택하면 해당 방법의 기준이 표시됩니다.</p>`);
-  },
-  proof:"제안요청서·공고문", ref:"매뉴얼 p.10"},
- {id:"i04", st:"s2", who:who1, type:"manual", tr:"BC",
-  t:"업체에 평가 기준(서식2·3)을 제시하고 안전보건관리계획서(서식1) 제출을 요구",
-  d:()=>`<ul><li>서식2: 최초 안전보건수준평가 / 서식3: 항목별 세부 평가기준 / 서식1: 안전보건관리계획서(업체 작성)</li><li>공고문·견적요청서에 첨부하거나 함께 안내</li></ul>`,
-  proof:"서식 1·2·3 송부 기록", ref:"매뉴얼 p.9, 27~31"},
+function qHtml(q, sub){
+  const cur = state.s1[q.id];
+  const opts = q.opts;
+  let h = `<div class="q${sub?" sub1":""}"><div class="qt">${q.n}${sub?"":"."} ${q.t}</div>`;
+  if(q.list) h += `<ul>${q.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+  if(q.h) h += `<div class="qh">${q.h}</div>`;
+  if(q.det) h += `<details><summary>매뉴얼 기준 보기</summary><div class="dbody">${q.det}</div></details>`;
+  if(SHOW_REVIEW_NOTES && q.rv) h += `<div class="review">⚠ 확인 필요(초안 검토용): ${q.rv}</div>`;
+  h += `<div class="yn" role="radiogroup">${opts.map(([v,l])=>`<label><input type="radio" name="${q.id}" value="${v}"${cur===v?" checked":""}>${l}</label>`).join("")}</div></div>`;
+  return h;
+}
+function renderS1(){
+  const {vis, c} = s1Visible();
+  let h = `<h2>판단 질문</h2>`;
+  h += S1Q.filter(q=>vis.includes(q.id)).map(q=>qHtml(q,false)).join("");
+  if(c){
+    h += `<div class="q"><div class="qt">5. 건설공사 총괄·관리 지위 판단</div><div class="qh">${S1C_INTRO}</div>`;
+    h += S1C.map(q=>qHtml(q,true)).join("") + `</div>`;
+  }
+  $("s1qs").innerHTML = h;
+  $("s1qs").querySelectorAll("input[type=radio]").forEach(r=>r.addEventListener("change",e=>{
+    state.s1[e.target.name] = e.target.value; save(); renderS1(); renderTabs(); renderS2();
+  }));
+  /* 흐름 표시 */
+  const res = s1Result();
+  const steps = ["도급 해당?","금지·승인 작업?","건설공사?","총괄·관리 지위?"];
+  let on = 0; const a = state.s1;
+  if(a.q1==="y"&&a.q2==="y") on=1; if(on===1&&a.q3==="none") on=2; if(on===2&&a.q4==="y") on=3;
+  $("s1flow").innerHTML = steps.map((s,i)=>`<span class="${i<=on?"on":""}">${i+1}단계 ${s}</span>`).join("<i>→</i>");
+  /* 결과 */
+  const box = $("s1result");
+  if(!res){ box.innerHTML = `<div class="sub" style="margin-top:10px">질문에 모두 답하면 결론이 나타납니다.</div>`; return; }
+  const R = RESULTS[res];
+  let r = `<div class="result ${R.cls}" style="margin-top:12px"><div class="rt">${R.t}</div>${R.b()}`;
+  if(R.next) r += `<div class="toolbar noprint"><button class="btn primary" type="button" id="goS2">다음: 2단계 적격 수급인 선정 →</button></div>`;
+  r += `</div>`;
+  r += recordHtml(res, R);
+  box.innerHTML = r;
+  const g = $("goS2"); if(g) g.addEventListener("click",()=>showTab("s2"));
+  const nm = $("recName"); if(nm){ nm.value = state.rec||""; nm.addEventListener("input",()=>{ state.rec = nm.value; save(); }); }
+  const pb = $("recPrint"); if(pb) pb.addEventListener("click",()=>printCard("s1record"));
+}
+function ansLabel(q, v){ const o = q.opts.find(x=>x[0]===v); return o? o[1] : "-"; }
+function recordHtml(res, R){
+  const rows = S1Q.concat(S1C).filter(q=>state.s1[q.id]).map(q=>`<tr><th>${q.n}</th><td>${q.t}</td><td style="white-space:nowrap">${ansLabel(q,state.s1[q.id])}</td></tr>`).join("");
+  const d = new Date().toLocaleDateString("ko-KR");
+  return `<section class="card formcard print-host" id="s1record" style="margin-top:12px">
+   <h3>도급인 판단 기록 <span class="chip tip">권장</span></h3>
+   <div class="sub noprint">판단 근거를 증빙으로 남기려면 인쇄 / PDF로 저장하세요.</div>
+   <table class="ftable"><tr><th>사업명</th><td colspan="2"><input type="text" id="recName" placeholder="사업명(선택)"></td></tr>
+   <tr><th>판단일</th><td colspan="2">${d}</td></tr>
+   ${rows}
+   <tr><th>결론</th><td colspan="2"><b>${R.t}</b></td></tr></table>
+   <div class="sign"><div>작성자 (사업담당자)<br>성명: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (서명)</div><div>확인자 (시설안전팀)<br>성명: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (서명)</div></div>
+   <div class="toolbar noprint"><button class="btn" type="button" id="recPrint">판단 기록 인쇄 / PDF</button></div></section>`;
+}
 
- /* --- S3 --- */
- {id:"i05", st:"s3", who:who1, type:"manual", tr:"BC",
-  t:"제출된 안전보건관리계획서를 서식2·3 기준으로 평가",
-  d:()=>`<ul><li>서류가 빠졌거나 불명확하면 <b>경미한 사항에 한해</b> 기한을 정해 보완 요구, 기한까지 못 내면 당초 서류만으로 평가</li><li>Ⅰ 안전보건관리체계 / Ⅱ 실행 수준 / Ⅲ 운영 관리 중 <b>하나라도 배점의 50% 미만이면 총점 0점</b></li></ul>`,
-  proof:"작성된 서식2", ref:"매뉴얼 p.9, 28"},
- {id:"i06", st:"s3", who:who1, type:"manual", tr:"BC",
-  t:()=>"선정 기준 충족 확인",
-  d:ctx=>{
-    if(ctx.ctype==="neg") return `<ul><li>협상에 의한 계약은 별도 기준점수 없이 <b>안전보건수준 점수를 배점에 반영</b>해 종합평가합니다.</li></ul>`;
-    if(ctx.ctype==="two") return `<ul><li>2인 견적은 공고 조건·제시한 안전보건 수준을 충족하는지 확인합니다.</li></ul>`;
-    return `<ul><li>1인 견적 수의계약 선정 기준(최초 안전보건수준평가 점수)<ul>
-      <li>일반 작업: <b>60점 이상</b></li>
-      <li>산업재해 발생 위험 장소(시행령 제11조) 작업: <b>70점 이상</b> (화재·폭발 우려 장소·밀폐공간 제외)</li>
-      <li>화재·폭발 우려 장소·밀폐공간(시행규칙 제6조) 작업: <b>80점 이상</b></li></ul></li>
-      <li>기준에 못 미치는 업체는 선정하지 않습니다.</li></ul>`;
+/* ================= 2단계: 적격 수급인 선정 ================= */
+const CTYPES = [["neg","협상에 의한 계약"],["one","1인 견적에 의한 수의계약"],["pay","지출·지급 (1인 견적과 동일)"],["two","2인 견적에 의한 수의계약"],["etc","그 밖의 방법(일반경쟁 등)"]];
+const norm = c => c==="pay" ? "one" : c;
+const VTYPES = [["g","일반 작업","60점"],["r","산업재해 발생 위험 장소 작업","70점"],["f","화재·폭발 우려 장소·밀폐공간 작업","80점"]];
+const S2G = [
+ {id:"g1", t:"① 자료 제시·징구", s:"계약 전"},
+ {id:"g2", t:"② 최초 안전보건수준평가", s:"업체 선정"},
+ {id:"g3", t:"③ 계약", s:"안전보건관리 비용 계상 등"}
+];
+const ALLM = ["neg","one","two","etc"];
+const S2I = [
+ {id:"p01", g:"g1", m:["neg","one"], type:"manual",
+  t:"사업 특성에 맞게 최초 안전보건수준평가 기준(서식2)과 항목별 세부 평가기준(서식3)을 작성",
+  d:()=>`<ul><li>사업담당자가 서식2·3(예시)을 참고해 사업에 맞게 작성합니다.</li>
+   <li>서식2 평가항목(총 100점): Ⅰ 안전보건관리체계 15 / Ⅱ 실행 수준 45 / Ⅲ 운영 관리 30 / Ⅳ 재해발생 수준 10</li></ul>`,
+  proof:"서식2·3", ref:"매뉴얼 p.9, 28~31"},
+ {id:"p02", g:"g1", m:ALLM, type:"manual",
+  t:"S·A등급 혜택 기간 내 업체인지 시설안전팀에 메일로 확인",
+  d:()=>`<ul><li>S등급: 차기 2회(동일 사업, 2년)에 한해 최초평가·재평가 미실시 / A등급: 차기 1회(동일 사업, 1년) 미실시</li>
+   <li>협상에 의한 계약은 S등급 업체에 최초평가 만점 부여(A등급도 점수에 관해서는 같음)</li>
+   <li>사업담당자 → 시설안전팀 메일로 확인 요청·회신. 해당하면 아래 평가 항목은 이 기준에 따라 생략·조정합니다.</li></ul>`,
+  proof:"확인 메일", ref:"매뉴얼 p.9, 26"},
+ {id:"p03", g:"g1", m:["neg"], type:"manual",
+  t:"제안요청서 평가항목(사업수행계획)에 안전보건수준 항목을 넣고 배점을 20점 이상 30점 이하로 설정",
+  d:()=>`<ul><li>산안법 제61조(적격수급인 선정)에 따른 안전보건수준 항목이 제안요청서 평가항목에 있어야 합니다.</li><li>제안요청서상 안전보건수준 평가항목 배점: <b>20점 이상 ~ 30점 이하</b></li></ul>`,
+  proof:"제안요청서", ref:"매뉴얼 p.10"},
+ {id:"p04", g:"g1", m:["neg","one"], type:"manual",
+  t:m=>m==="neg"?"업체에 평가 기준(서식2·3)을 제시하고, 제안서에 안전보건관리계획서(서식1)를 포함하도록 요구":"업체에 평가 기준(서식2·3)을 제시하고 안전보건관리계획서(서식1) 제출을 요구",
+  d:m=>`<ul><li>서식1: 안전보건관리계획서(업체 작성) — 회사 소개, 안전보건관리 체계·인력, 위험성평가, 안전점검, 보호구 보유, 점검결과·지시사항 이행, 교육 계획, 신호 체계, 위험물질·설비, 재해발생 대책, 산업재해 발생 현황 등</li>
+   <li>${m==="neg"?"제안서 평가 시 제출된 제안서(안전보건관리계획서)로 평가합니다.":"계약 전에 제시·징구합니다."}</li></ul>`,
+  proof:"서식1·2·3 송부 기록", ref:"매뉴얼 p.9~10, 27"},
+ {id:"p05", g:"g1", m:["two"], type:"manual",
+  t:"공고 내용(입찰자격·조건 등)에 일정한 안전보건수준을 포함하거나, 도급 작업과 관련해 필요한 안전보건 수준을 제시",
+  d:()=>`<ul><li>2인 견적 수의계약은 점수 평가 대신 이 방법으로 적격수급인 선정 의무를 이행합니다.</li></ul>`,
+  proof:"공고문(견적요청서)", ref:"매뉴얼 p.10"},
+ {id:"p06", g:"g1", m:["etc"], type:"tip",
+  t:"선정 방법을 시설안전팀과 협의",
+  d:()=>`<ul><li>일반경쟁 등 그 밖의 계약 방법에 대해서는 매뉴얼에 적격수급인 선정 기준이 없습니다. 산안법 제61조에 따라 능력을 갖춘 업체에 도급해야 하므로 시설안전팀과 협의해 방법을 정하세요.</li></ul>`,
+  proof:"협의 메일", ref:"매뉴얼 p.9~10 (기준 없음)",
+  rv:"그 밖의 계약 방법(일반경쟁 등)의 선정 기준을 매뉴얼에 추가하거나 별도 안내할지 검토 필요."},
+
+ {id:"e01", g:"g2", m:["neg","one"], type:"manual",
+  t:m=>m==="neg"?"제안서평가위원회 심의 시, 제출된 안전보건관리계획서(서식1)를 서식2·3 기준으로 평가":"징구한 안전보건관리계획서(서식1)를 서식2·3 기준으로 평가",
+  d:()=>`<ul><li>서식3(항목별 세부 평가기준)에 따라 항목마다 우수·보통·미흡으로 점수를 매깁니다.</li>
+   <li><b>총점 제한</b>: Ⅰ 안전보건관리체계, Ⅱ 실행 수준, Ⅲ 운영 관리 중 <b>하나라도 배점의 50% 미만이면 최종 총점은 0점</b></li></ul>`,
+  proof:"작성된 서식2", ref:"매뉴얼 p.9~10, 28~31"},
+ {id:"e02", g:"g2", m:["neg","one"], type:"manual",
+  t:"서류가 빠졌거나 불명확하면, 경미한 사항에 한해 기한을 정해 보완 요구",
+  d:()=>`<ul><li>평가 서류가 첨부되지 않았거나 불명확해 인지할 수 없는 경우 <b>경미한 사항에 한하여</b> 기한을 정해 보완을 요구해야 합니다.</li>
+   <li>기한까지 제출하지 않으면 <b>당초 서류만으로</b> 평가합니다.</li></ul>`,
+  proof:"보완 요구 기록", ref:"매뉴얼 p.9"},
+ {id:"e03", g:"g2", m:["neg"], type:"manual",
+  t:"최초 안전보건수준평가 총점에 배점 비율을 곱해 제안서 평가 점수에 반영",
+  d:()=>`<ul><li>점수 반영 = 최초 안전수준평가 총점 × (제안요청서상 안전보건수준 평가항목 배점 ÷ 100)</li>
+   <li>예) 평가 총점 80점, 배점 20점 → 80 × 20/100 = <b>16점</b></li></ul>`,
+  proof:"평가표", ref:"매뉴얼 p.10"},
+ {id:"e04", g:"g2", m:["one"], type:"manual",
+  t:(m,s)=>{ const v = VTYPES.find(x=>x[0]===s.vtype); return v? `최초 안전보건수준평가 점수가 ${v[2]} 이상인 업체인지 확인` : "최초 안전보건수준평가 점수가 선정 기준 이상인 업체인지 확인"; },
+  d:(m,s)=>{
+    const sel = VTYPES.find(x=>x[0]===s.vtype);
+    return `<p>사업(작업) 유형별 선정 기준:</p><ul>
+    <li>일반 작업(아래 둘을 제외한 모든 작업): <b>60점 이상</b></li>
+    <li>산업재해 발생 위험 장소(산안법 시행령 제11조)에서의 작업: <b>70점 이상</b> (화재·폭발 우려 장소·밀폐공간 작업장소는 제외)</li>
+    <li>화재·폭발 우려 장소 및 밀폐공간 작업장소(산안법 시행규칙 제6조)에서의 작업: <b>80점 이상</b></li></ul>
+    ${sel?`<p>선택한 유형: <b>${sel[1]} → ${sel[2]} 이상</b></p>`:`<p>위 「작업 유형」을 선택하면 기준점수가 제목에 표시됩니다.</p>`}`;
   },
   proof:"평가 결과", ref:"매뉴얼 p.10"},
- {id:"i07", st:"s3", who:who1, type:"manual", tr:"BC",
-  t:"S·A 등급 혜택 기간 내 업체인지 시설안전팀에 메일로 확인",
-  d:()=>`<ul><li>S등급: 차기 2회(동일 사업, 2년) 최초평가·재평가 미실시 / A등급: 차기 1회(1년) 미실시</li><li>협상에 의한 계약은 S·A등급 업체에 최초평가 만점 부여(A등급은 점수에 한함)</li><li>사업담당자 → 시설안전팀 메일로 확인 요청·회신</li></ul>`,
-  proof:"확인 메일", ref:"매뉴얼 p.9, 26"},
- {id:"i08", st:"s3", who:who1, type:"manual", tr:"BC",
-  t:"평가에서 드러난 업체 취약점을 확인하고, 지원이 필요한 사항을 작업 전 안전보건관리에 반영",
-  d:()=>`<ul><li>예) 위험성평가 능력이 부족하면 착수 전에 위험성평가 방법을 안내·지원 (아래 「착수 전」 항목과 연결)</li></ul>`,
+ {id:"e05", g:"g2", m:["two"], type:"manual",
+  t:"제출 자료가 공고에 제시한 입찰자격·안전보건 수준 조건을 충족하는지 확인",
+  d:()=>`<ul><li>공고 조건 충족 여부를 확인하고 계약 업체를 정합니다.</li></ul>`,
+  proof:"확인 기록", ref:"매뉴얼 p.10",
+  rv:"2인 견적에서 '조건 충족 확인'의 구체적 방법(서류·점수 등)은 매뉴얼에 없어 일반적 표현으로 작성함."},
+ {id:"e06", g:"g2", m:["neg","one"], type:"manual",
+  t:"평가 결과로 업체의 문제점을 도출하고, 지원이 필요한 사항을 도급 작업 전에 확인해 안전보건관리에 반영",
+  d:()=>`<ul><li>예) 위험성평가 능력이 부족하면 착수 전에 위험성평가 방법을 안내·지원하도록 계획에 반영합니다(이후 단계와 연결).</li></ul>`,
   proof:"-", ref:"매뉴얼 p.9"},
- {id:"i09", st:"s3", who:who1, type:"manual", tr:"A",
-  t:"(제외 업무) 업체의 안전보건관리계획서(서식1)를 간이 확인",
-  d:()=>`<p>매뉴얼 p.22는 제외 업무도 적격수급인 선정을 이행하도록 하고 있습니다. 구체적인 간소화 방법은 시설안전팀과 협의하세요.</p>`,
-  proof:"서식1", ref:"매뉴얼 p.22",
-  rv:"제외 업무(5개)의 적격수급인 선정을 어느 수준까지 할지 매뉴얼에 기준이 없음. 간소화 방식 확정 필요."},
 
- /* --- S4 --- */
- {id:"i10", st:"s4", who:who1, type:"manual", tr:"ABC",
+ {id:"c01", g:"g3", m:ALLM, type:"manual",
+  t:"안전보건관리 비용을 총액이 아닌 가급적 항목별로 구체적으로 계상(예산·산출내역·계약서)",
+  d:()=>`<ul><li>대상: 수급인이 사용하는 시설·설비·장비 등에 대한 안전·보건 조치에 필요한 비용, 종사자의 개인 보호구 등 안전 및 보건 확보를 위한 금액</li></ul>`,
+  proof:"산출내역서", ref:"매뉴얼 p.9"},
+ {id:"c02", g:"g3", m:ALLM, type:"manual",
   t:"안전보건관리 서약서(서식4) 징구",
-  d:()=>`<ul><li>사업명을 적고 업체 대표자가 서명·날인</li><li>법령 필수 의무 준수 서약, 위반 시 계약해지·입찰참가자격 제한 등 불이익 처분에 이의 제기하지 않겠다는 내용</li></ul>`,
-  proof:"서식4", ref:"매뉴얼 p.32"},
- {id:"i11", st:"s4", who:who1, type:"manual", tr:"ABC",
-  t:"계약서·과업지시서에 안전보건 명시사항(서식5) 반영",
-  d:()=>`<ul><li>위험성평가·안전보건정보 제공·안전보건조치 이행·협의체·교육 지원·점검(합동·순회) 협조·위생시설·훈련·산업재해 현황 제출 등</li><li><b>「양식 모음」 탭의 특약 문구(예시)</b>를 복사해 사용할 수 있습니다.</li></ul>`,
-  proof:"계약서·과업지시서", ref:"매뉴얼 p.33~34"},
-
- /* --- S5 --- */
- {id:"i13", st:"s5", who:who1, type:"law", tr:"BC", exemptIf:"q7",
-  t:"안전보건협의체 구성 (도급인 + 수급인 전원)",
-  d:()=>`<ul><li>구성: 관 + 수급인 전원 (수급인이 재하도급한 관계수급인은 제외)</li><li><b>최초 위험성평가 전에</b> 구성</li><li>협의 사항 5가지: ① 작업 시작 시간 ② 작업 또는 작업장 간 연락 방법 ③ 재해 위험 시 대피 방법 ④ 위험성평가 실시에 관한 사항 ⑤ 사업주와 수급인·수급인 상호 간 연락 방법 및 작업공정 조정</li><li>회의록(서식6)에 참석자 서명·진행 사진 첨부</li><li>예외: 30일 이내 일시적 작업, 연 60일 이하 간헐적 작업, 제외 업무(5개)</li></ul>`,
-  proof:"서식6(첫 회의록)", ref:"매뉴얼 p.11~12, 35",
-  rv:"p.12는 제외 업무의 협의체 구성을 면제하나, p.22는 제외 업무도 '작업 전 안전·보건 활동'을 이행하라고 해 충돌로 읽힘."},
- {id:"i14", st:"s5", who:who1, type:"manual", tr:"BC", exemptIf:"q7", core:false,
-  t:"기관장·사업주 불참 시 대리인 지정(위임장, 서식7)",
-  d:()=>`<ul><li>대리인 지정 가능하나, 회의·점검 결과와 조치 이행 여부는 결재 등으로 관리·감독해야 합니다.</li></ul>`,
-  proof:"서식7", ref:"매뉴얼 p.36"},
- {id:"i15", st:"s5", who:who1, type:"law", tr:"BC",
-  t:"관(도급인)의 위험성평가 실시 후 결과를 수급인에게 제공",
-  d:()=>`<ul><li>도급 사업 시작 <b>전에</b> 위험성평가를 하고, 위험을 미리 줄인 뒤 결과를 수급인에게 제공</li><li>해당 작업장의 유해·위험요인을 가장 잘 아는 근로자를 참여시킴(사업 개시 전이라 어려우면 안전관리자 등 전문가 도움 가능)</li><li>제공 사실은 「양식 모음」의 제공·수령 확인서로 남길 수 있습니다.</li></ul>`,
-  proof:"위험성평가 결과, 제공 기록", ref:"매뉴얼 p.12, 안전보건관리규정 제45조",
-  rv:"규정 제45조는 도급 위험성평가 실시자를 '실질적관리감독자'로 정함. 사업담당자가 이 역할을 하는지(또는 누구와 함께 하는지) 정리 필요."},
- {id:"i16", st:"s5", who:who1, type:"law", tr:"BC",
-  t:"수급인의 위험성평가 실시를 지원하고 결과 수령·검토",
-  d:()=>`<ul><li>사업 개시 이후 수급인은 자체 위험성평가, 관은 실시할 수 있도록 지원(교육, 정보 제공 등)</li><li>최초 평가에서 위험성평가 항목이 <b>'보통' 이하</b>이면, 관이 수급인을 참여시켜 수급인 작업공정에 대한 위험성평가를 하도록 지원</li><li>수급인 결과를 검토해 관이 개선할 사항이 있으면 개선</li></ul>`,
-  proof:"수급인 위험성평가 결과", ref:"매뉴얼 p.12~13"},
- {id:"i17", st:"s5", who:who1, type:"law", tr:"ABC", showIf:"q6",
-  t:"안전보건 정보를 문서로 제공 (정보제공 대상 작업)",
-  d:()=>`<ul><li>작업 <b>시작 전</b> 수급인에게 문서(전자문서 가능)로 제공: ① 위험물질·유해물질 명칭과 유해성·위험성 ② 유해·위험 작업의 주의사항 ③ 물질 유출 등 사고 시 필요한 조치</li><li>수급인이 재하도급하면 문서 사본을 재수급인에게 제공하도록 함</li><li>관계수급인 근로자가 필요한 조치를 받고 있는지 확인, 관련 기록 수령</li></ul>`,
-  proof:"제공 문서·확인서", ref:"매뉴얼 p.13~15, 서식5-②"},
- {id:"i18", st:"s5", who:who1, type:"law", tr:"BC",
-  t:"작업 혼재 확인·조정 (같은 장소에서 관·타 업체 작업이 겹치는 경우)",
-  d:()=>`<ul><li>같은 장소에서 작업이 이루어지면 작업시기·내용·안전보건조치를 확인</li><li>다음 우려가 있으면 작업시기·내용을 조정: 화재·폭발, 기계 끼임, 충돌, 추락, 낙하·비래, 넘어짐·무너짐, 토사·구축물 붕괴, 질식·중독</li><li>행사·전시: 무대·조명·음향·전시물 설치 업체가 동시에 들어오는 경우. 일정이 바뀌면 다시 확인.</li><li>「양식 모음」의 작업 혼재 조정 확인서를 활용할 수 있습니다.</li></ul>`,
-  proof:"조정 확인서", ref:"매뉴얼 p.24"},
- {id:"i19", st:"s5", who:who1, type:"law", tr:"BC",
-  t:"안전보건관리규정 배포 (게시·비치 및 근로자에게 알림)",
-  d:()=>`<ul><li>작업장에 게시하거나 갖춰 두고 근로자에게 알립니다. 업체에 규정을 전달(메일 등)하고 기록을 남기세요.</li></ul>`,
-  proof:"전달 메일", ref:"매뉴얼 p.24"},
- {id:"i20", st:"s5", who:who1, type:"law", tr:"BC",
-  t:"안전보건교육 지원 + 특별안전보건교육 실시 확인",
-  d:()=>`<ul><li>수급인이 자체 교육을 할 수 있게 장소·자료(교재, 기자재 등)를 제공하고, 강사·기자재를 요청하면 적극 협조</li><li>특별안전보건교육 대상 작업(시행규칙 별표5)이면 수급인의 실시 여부 확인 → 특별교육 확인서(서식10) 또는 이수증 수령</li></ul>`,
-  proof:"서식10 또는 이수증", ref:"매뉴얼 p.23, 39"},
- {id:"i21", st:"s5", who:who1, type:"law", tr:"BC", core:false,
-  t:"위생시설(휴게·세면·탈의·수면시설 등) 이용 협조",
-  d:()=>`<ul><li>행사·전시: 작업자가 이용할 화장실·휴게 공간을 안내하거나 제공</li></ul>`,
-  proof:"-", ref:"매뉴얼 p.24"},
- {id:"i22", st:"s5", who:who1, type:"law", tr:"C", opt:true, core:false,
-  t:"(해당 시) 경보체계 운영·대피방법 훈련",
-  d:()=>`<ul><li>작업 장소에서 발파작업을 하는 경우, 또는 화재·폭발·붕괴·지진 등에 대비해야 하는 경우 상호 연락체계·신호방법을 정하고 대피방법에 따라 훈련 후 개선</li><li>훈련일지(서식11)에 도급인·수급인·관계수급인 확인 서명</li></ul>`,
-  proof:"서식11", ref:"매뉴얼 p.23~24, 40"},
- {id:"i23", st:"s5", who:who1, type:"law", tr:"C", opt:true, core:false,
-  t:"(해당 시) 작업환경측정 대상 유해인자 노출 작업 여부 확인",
-  d:()=>`<ul><li>분진·용접흄·유기용제 등 측정 대상 유해인자에 노출되는 작업이 있다고 판단되면 작업환경특성 조사표(안전보건관리규정 별지 제1호)를 시설안전팀에 제출</li></ul>`,
-  proof:"작업환경특성 조사표", ref:"매뉴얼 p.24, 규정 제34조"},
- {id:"i24", st:"s5", who:who1, type:"tip", tr:"C", core:false,
-  t:"관람객·직원 접근 통제 구역, 작업 시간대(휴관·야간), 동선 분리를 업체와 사전 협의",
-  d:()=>`<ul><li>행사·전시 현장 특성을 반영한 제안입니다. 안전펜스·안내 인력·통제 시간을 정해 협의체(또는 사전 회의) 기록에 남기세요.</li></ul>`,
-  proof:"회의 기록", ref:"매뉴얼 외 제안"},
- {id:"i25", st:"s5", who:who1, type:"tip", tr:"C", core:false,
-  t:"업체 제출서류 수령: 작업자 명단·연락처, 교육·자격 증빙, 보호구 지급 계획, 비상연락망",
-  d:()=>`<ul><li>「양식 모음」의 업체 제출서류 체크표를 활용할 수 있습니다.</li></ul>`,
-  proof:"제출서류", ref:"매뉴얼 외 제안"},
- {id:"i26", st:"s5", who:who1, type:"tip", tr:"A", core:false,
-  t:"출입 시 관의 안전수칙을 업체에 안내(메일 등)",
-  d:()=>`<ul><li>작업 장소 출입 전 기본 안전수칙, 시정 요구에 따를 의무, 사고 시 연락처를 안내합니다.</li></ul>`,
-  proof:"안내 메일", ref:"매뉴얼 외 제안"},
-
- /* --- S6 --- */
- {id:"i27", st:"s6", who:who1, type:"law", tr:"BC", exemptIf:"q7",
-  t:"안전보건협의체 정기회의(매월 1회 이상) 개최 및 회의록 보존",
-  d:()=>`<ul><li>협의 사항 5가지를 협의하고 회의록(서식6) 작성·보존</li><li>(권장) 사업 기간이 1개월보다 짧아도 작업 시작 전에 1회 협의하고 기록을 남기세요.</li></ul>`,
-  proof:"서식6", ref:"매뉴얼 p.11, 35",
-  rv:"사업 기간이 1개월 미만이면서 협의체 예외(30일/60일)에 해당하지 않는 경우의 최소 개최 횟수가 명확하지 않음."},
- {id:"i28", st:"s6", who:who1, type:"law", tr:"BC",
-  t:ctx=>`작업장 순회점검 ${ctx.cons?"2일에 1회":"1주일에 1회"} 이상 (서식9)`,
-  d:ctx=>`<ul><li>점검 주기: <b>${ctx.cons?"건설업 기준 2일에 1회 이상":"1주일에 1회 이상"}</b> (작업이 있는 기간)</li><li>점검 항목 예시(서식9): 작업 전 안전교육, 안전표지 부착, 보호구 착용, 안전통로 확보, 추락방지, 낙하물 안전조치, 작업환경</li><li>업체는 순회점검을 거부·방해·기피할 수 없고, 점검 결과 관의 시정 요구에 따라야 함</li><li>소속 직원(사업담당자)이 직접 점검 가능. 아래 「점검 일정 참고」를 활용하세요.</li></ul>`,
-  proof:"서식9", ref:"매뉴얼 p.23, 38"},
- {id:"i29", st:"s6", who:who1, type:"law", tr:"BC",
-  t:ctx=>`합동 안전보건점검 ${ctx.cons?"2개월에 1회":"분기에 1회"} 이상 (서식8)`,
-  d:ctx=>`<ul><li>점검 주기: <b>${ctx.cons?"건설업 기준 2개월에 1회 이상":"분기에 1회 이상"}</b></li><li>구성: 관 + 관계수급인 + 관계수급인 근로자 각 1명 (관계수급인·근로자는 당일 작업이 있을 때만 자기 작업장 점검)</li><li>(권장) 사업 기간이 ${ctx.cons?"2개월":"분기"}보다 짧은 단기 사업은 설치 완료 전 1회 실시하고 서식8로 기록</li></ul>`,
-  proof:"서식8", ref:"매뉴얼 p.23, 37",
-  rv:"단기 사업(주기보다 짧은 기간)의 합동점검 실시 의무 여부가 매뉴얼에 명시되어 있지 않음. 법령 확인 후 문구 확정 필요."},
- {id:"i30", st:"s6", who:who1, type:"law", tr:"BC",
-  t:"지적사항 시정 요구 및 조치 결과 확인 (사진 첨부)",
-  d:()=>`<ul><li>위험요인 발견사항·시정 요구·조치 결과를 서식9 하단 표에 기록</li><li>수급인이 산안법 등을 위반하면 시정조치를 요구할 수 있고(할 수 있음), 정당한 사유 없이 따르지 않으면 과태료(500만 원 이하) 대상. 계약서에 시정조치 가능 사실을 명시해 두세요.</li><li>보호구 착용 지시 등 근로자의 작업행동에 대한 직접 지시는 수급인(근로계약 당사자)이 합니다.</li></ul>`,
-  proof:"서식9 조치결과, 메일", ref:"매뉴얼 p.16, 25, 38"},
- {id:"i31", st:"s6", who:who1, type:"manual", tr:"ABC", opt:true,
-  t:"(사고 발생 시에만) 사고 대응·보고",
-  d:()=>`<ul><li>① 즉시 작업 중지·대피·응급조치 ② 시설안전팀에 지체 없이 보고 ③ 사고보고서(규정 별지 제2호) 작성·전자문서 제출 ④ <b>중대재해</b>는 지체 없이 관할 지방고용노동관서(대전지방고용노동청)에 전화·팩스 등으로 보고 ⑤ 사망 또는 3일 이상 휴업이 필요한 재해는 발생일부터 1개월 이내 산업재해조사표 제출</li><li>중대재해: 사망 1명 이상, 동일 사고로 6개월 이상 치료 부상자 2명 이상 등(규정 제2조)</li><li>세부 절차는 「국립중앙과학관 중대재해대응 매뉴얼」 참조</li></ul>`,
-  proof:"사고보고서", ref:"안전보건관리규정 제43~44조(매뉴얼 p.52, 57~58)"},
-
- /* --- S7 --- */
- {id:"i34", st:"s7", who:who1, type:"manual", tr:"ABC",
-  t:"증빙 정리·보관 (서약서, 회의록, 점검표, 교육·훈련 일지, 위험성평가 결과, 제공 확인서 등)",
-  d:()=>`<ul><li>이 규정의 시행에 관한 모든 기록은 법 제164조에 따라 보존합니다. 계약 서류와 함께 철해 두세요.</li></ul>`,
-  proof:"증빙 철", ref:"안전보건관리규정 제47조"},
- {id:"i35", st:"s7", who:who1, type:"tip", tr:"BC",
-  t:"사업 기간 중 보호구 착용·시정 요구 이행·산업재해 발생 여부를 정리해 시설안전팀에 전달",
-  d:()=>`<ul><li>재평가(서식12)의 감점 근거 자료입니다: 보호구 지급·착용 미이행(건당 -1), 점검 지적 후에도 미개선(건당 -1.5), 산업재해 발생(-5), 중대재해 발생(-20)</li><li>순회점검표(서식9)의 조치결과를 정리해 전달하면 충분합니다.</li></ul>`,
-  proof:"서식9 사본 등", ref:"매뉴얼 p.26, 41 (역할 분담은 제안)",
-  rv:"매뉴얼에 사업담당자·시설안전팀의 역할 분담이 명시되어 있지 않아 제안으로 작성함."},
- {id:"i36", st:"s7", who:who1, type:"manual", tr:"BC",
-  t:"준공 전: 업체에 최초 평가의 문제점을 보완한 안전보건관리계획서를 받아 시설안전팀에 전달",
-  d:()=>`<ul><li>S·A등급 혜택으로 재평가가 면제되는 업체는 생략</li></ul>`,
-  proof:"보완 계획서", ref:"매뉴얼 p.26",
-  rv:"재징구 주체가 매뉴얼에 명시되지 않아 사업담당자로 배정함. 서식12 머리표(사업 담당자·작업 후·정산 시·평가 후 안전총괄부서에 제출)는 사업담당자가 재평가를 작성하는 것으로 읽힐 수 있어 확인 필요."},
- {id:"i37", st:"s7", who:who2, type:"manual", tr:"BC",
-  t:"재평가 실시(서식2·3 기준 + 서식12 감점) 및 결과 통보",
-  d:()=>`<ul><li>서식2 최초 평가 총점에서 서식12의 미흡 기준에 해당하면 감점해 최종 점수·등급 부여</li><li>등급: S 90점 이상 / A 81점 이상 90점 미만 / B 81점 미만</li><li>평가 결과는 공문(또는 메일)으로 통보</li></ul>`,
-  proof:"서식12, 통보 공문", ref:"매뉴얼 p.26, 41"},
- {id:"i38", st:"s7", who:who2, type:"manual", tr:"BC",
-  t:"등급 결과에 따라 업체의 '안전·보건관리 수준 실적' 관리, 차기 계약 시 혜택 확인 요청에 회신",
-  d:()=>`<ul><li>안전 총괄 부서에서 재평가 결과를 공문으로 받은 경우에 한해 실적을 관리합니다.</li><li>혜택 확인은 사업담당자와 시설안전팀 간 메일로 요청·회신합니다.</li></ul>`,
-  proof:"실적 관리 대장", ref:"매뉴얼 p.26"},
- {id:"i39", st:"s7", who:who1, type:"manual", tr:"BC",
-  t:"재평가 결과(서식12)를 정산 서류에 반영·첨부",
-  d:()=>`<ul><li>서식12는 정산 시 사용하는 서식입니다(매뉴얼 p.41 머리표).</li></ul>`,
-  proof:"서식12", ref:"매뉴얼 p.41"}
+  d:()=>`<ul><li>사업명을 적고 업체 대표자가 서명·날인합니다.</li><li>안전보건 관계 법규의 필수 의무사항을 준수하겠다는 서약과, 위반 시 계약해지·입찰참가자격 제한 등 불이익 처분에 이의를 제기하지 않겠다는 내용입니다.</li></ul>`,
+  proof:"서식4", ref:"매뉴얼 p.9, 32"},
+ {id:"c03", g:"g3", m:ALLM, type:"manual",
+  t:"계약 시 명시사항(서식5)을 계약서에 제시·반영",
+  d:()=>`<ul><li>위험성평가, 안전보건정보 제공, 안전보건조치 이행, 안전보건협의체, 안전보건교육, 안전보건 점검(합동·순회), 위생시설 협조, 경보체계·훈련, 산업재해현황 제출 등</li>
+   <li><b>「양식 모음」 탭의 특약 문구(예시)</b>를 복사해 사용할 수 있습니다.</li></ul>`,
+  proof:"계약서", ref:"매뉴얼 p.9, 33~34"}
 ];
 
-/* ---------- 추가 양식 ---------- */
+function renderS2(){
+  const host = $("s2body");
+  const res = s1Result();
+  if(res!=="DOGEUP"){
+    host.innerHTML = `<section class="card"><div class="result warn"><div class="rt">먼저 1단계에서 「도급인」으로 판단되어야 합니다</div>
+      <div>${res? "현재 1단계 결과가 「도급인」이 아닙니다. 1단계 결론을 확인하세요.":"1단계 질문에 아직 모두 답하지 않았습니다."}</div>
+      <div class="toolbar noprint"><button class="btn primary" type="button" id="backS1">← 1단계로 이동</button></div></div></section>`;
+    $("backS1").addEventListener("click",()=>showTab("s1")); return;
+  }
+  const s = state.s2, m = norm(s.ctype);
+  let h = `<section class="card"><div class="row">
+    <label class="f">계약 방법 (이 선택에 따라 해야 할 일이 달라집니다)
+     <select id="s2ctype"><option value="">선택하세요</option>${CTYPES.map(([v,l])=>`<option value="${v}"${s.ctype===v?" selected":""}>${l}</option>`).join("")}</select></label>`;
+  if(m==="one") h += `<label class="f">작업 유형 (1인 견적 선정 기준점수가 달라집니다)
+     <select id="s2vtype"><option value="">선택하세요</option>${VTYPES.map(([v,l,p])=>`<option value="${v}"${s.vtype===v?" selected":""}>${l} (${p} 이상)</option>`).join("")}</select></label>`;
+  h += `</div>`;
+  if(SHOW_REVIEW_NOTES) h += `<div class="review" style="margin-top:8px">⚠ 확인 필요(초안 검토용): 매뉴얼 p.22는 '산업재해 예방조치를 하지 않아도 되는 작업(5개)'도 적격수급인 선정을 이행하도록 하고 있으나, 그 경우의 간소화 기준은 없습니다. 이 체크리스트는 제외 업무도 동일하게 적용합니다.</div>`;
+  h += `</section>`;
+  if(!m){ host.innerHTML = h + `<div class="sub" style="margin-top:8px">계약 방법을 선택하면 체크리스트가 나타납니다.</div>`; bindS2(); return; }
+  const items = S2I.filter(i=>i.m.includes(m));
+  const done = items.filter(i=>state.s2.checks[i.id]).length, pct = items.length? Math.round(done*100/items.length):0;
+  h += `<section class="card"><b>진행: ${done} / ${items.length}</b> (${pct}%)<div class="bar"><i style="width:${pct}%"></i></div>
+    ${done===items.length&&items.length?`<div class="note" style="background:var(--ok-soft);color:var(--ok)">적격 수급인 선정 단계를 모두 마쳤습니다. 이후 단계(작업 전 안전보건 활동 등)는 순차적으로 추가될 예정입니다.</div>`:""}</section>`;
+  host.innerHTML = h + `<div id="s2list"></div>`;
+  bindS2();
+  const list = $("s2list");
+  S2G.forEach(G=>{
+    const its = items.filter(i=>i.g===G.id); if(!its.length) return;
+    const sec = document.createElement("div"); sec.className="stage";
+    sec.innerHTML = `<h2>${G.t} <small>${G.s}</small></h2>`;
+    its.forEach(it=>{
+      const v = state.s2.checks[it.id]||0;
+      const el = document.createElement("div"); el.className = "item"+(v?" done":"");
+      const title = typeof it.t==="function"? it.t(m,s): it.t;
+      let chips = `<span class="chip ${it.type}">${TYPE_LABEL[it.type]}</span>`;
+      if(it.proof && it.proof!=="-") chips += `<span class="chip proof">증빙: ${it.proof}</span>`;
+      el.innerHTML = `<div class="chkw"><input type="checkbox" aria-label="완료" ${v?"checked":""}></div>
+        <div class="body"><div class="ttl">${title}</div><div class="chips">${chips}</div>
+        <button type="button" class="more">자세히 보기</button>
+        <div class="detail">${it.d(m,s)}<p class="ref">근거: ${it.ref}</p>${SHOW_REVIEW_NOTES&&it.rv?`<div class="review">⚠ 확인 필요(초안 검토용): ${it.rv}</div>`:""}</div></div>`;
+      const cb = el.querySelector("input");
+      cb.addEventListener("change",()=>{ state.s2.checks[it.id] = cb.checked?1:0; save(); renderS2(); renderTabs(); });
+      const more = el.querySelector(".more"), dt = el.querySelector(".detail");
+      more.addEventListener("click",()=>{ const o = dt.classList.toggle("open"); more.textContent = o?"접기":"자세히 보기"; });
+      sec.appendChild(el);
+    });
+    list.appendChild(sec);
+  });
+}
+function bindS2(){
+  const c = $("s2ctype"); if(c) c.addEventListener("change",()=>{ state.s2.ctype = c.value; save(); renderS2(); renderTabs(); });
+  const v = $("s2vtype"); if(v) v.addEventListener("change",()=>{ state.s2.vtype = v.value; save(); renderS2(); });
+}
+function s2Complete(){
+  const m = norm(state.s2.ctype); if(!m) return false;
+  const items = S2I.filter(i=>i.m.includes(m)); return items.length>0 && items.every(i=>state.s2.checks[i.id]);
+}
+
 const CLAUSE = `안전보건 관리 특약(예시)
 
 제1조(법령 준수) 수급인은 「산업안전보건법」, 「중대재해 처벌 등에 관한 법률」 등 안전보건 관계 법령과 국립중앙과학관(이하 "관")의 안전보건관리규정을 준수한다.
@@ -492,146 +567,68 @@ const FORMS = [
   sign:["확인자 (관 사업담당자)"]}
 ];
 
-/* ---------- 상태 ---------- */
-let state = {info:{name:"",owner:"",vendor:"",ctype:"",start:"",end:""}, q:{}, checks:{}, core:false};
-const $ = id => document.getElementById(id);
 
-function load(){
-  try{ const s = localStorage.getItem(KEY); if(s){ const o = JSON.parse(s); state = Object.assign(state,o); state.info = Object.assign({name:"",owner:"",vendor:"",ctype:"",start:"",end:""}, o.info||{}); } }catch(e){}
+
+/* ================= 공통 ================= */
+let state = {s1:{}, s2:{ctype:"", vtype:"", checks:{}}, rec:"", tab:"s1"};
+function freshState(){ return {s1:{}, s2:{ctype:"", vtype:"", checks:{}}, rec:"", tab:"s1"}; }
+function load(){ try{ const s = localStorage.getItem(KEY); if(s) adopt(JSON.parse(s)); }catch(e){} }
+function adopt(o){
+  const f = freshState();
+  state = {s1:o.s1||f.s1, s2:Object.assign(f.s2,o.s2||{}), rec:o.rec||"", tab:o.tab||"s1"};
+  state.s2.checks = state.s2.checks||{};
 }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
 
-/* ---------- 판정 ---------- */
-function ctx(){ return {ctype:state.info.ctype, cons:state.q.q5==="y"}; }
-function decide(){
-  const q = state.q;
-  if(q.q1==="n") return "X";
-  if(q.q1!=="y") return null;
-  if(q.q2==="y") return "STOP";
-  if(q.q2!=="n") return null;
-  if(q.q3==="y"){ /* 제외업무 */ }
-  else if(q.q3!=="n") return null;
-  const need = (q.q3==="y") ? ["q5","q6","q7"] : ["q4","q5","q6","q7"];
-  for(const k of need) if(!q[k]) return null;
-  if(q.q3==="y") return "A";
-  return q.q4==="y" ? "C" : "B";
+const TABS = [["s1","1. 도급인 확인"],["s2","2. 적격 수급인 선정"],["forms","양식 모음"]];
+function renderTabs(){
+  const r1 = s1Result();
+  const dots = {s1: r1==="DOGEUP", s2: s2Complete()};
+  $("tabs").innerHTML = TABS.map(([id,l])=>`<button class="tab" role="tab" type="button" data-tab="${id}" aria-selected="${state.tab===id}">${l}${id in dots?`<span class="dot${dots[id]?" ok":""}" title="${dots[id]?"완료":"진행 중"}"></span>`:""}</button>`).join("");
+  $("tabs").querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
 }
-const TRACKS = {
-  A:{n:"트랙 A — 제외 업무(최소 확인)", d:"부수적 작업·회의 참석·교육 등만 해당하는 계약입니다. 서약서와 계약 문구 중심으로 최소한만 확인합니다."},
-  B:{n:"트랙 B — 일반 도급", d:"위험작업이 없는 일반 도급(용역 등)입니다. 선정 평가부터 점검·재평가까지 표준 절차를 진행합니다."},
-  C:{n:"트랙 C — 위험작업 포함(강화)", d:"고소·화기·전기·중량물 등 위험작업이 포함됩니다. 표준 절차에 더해 위험작업 관리 항목을 확인합니다."}
-};
-
-function visibleItems(){
-  const t = decide(); if(!t || !TRACKS[t]) return [];
-  return ITEMS.filter(it=>{
-    if(!it.tr.includes(t)) return false;
-    if(it.showIf && state.q[it.showIf]!=="y") return false;
-    if(state.core && (it.core===false || it.opt) && it.id!=="i31") return false;
-    return true;
-  });
-}
-function isExempt(it){ return it.exemptIf && state.q[it.exemptIf]==="y"; }
-
-/* ---------- 렌더 ---------- */
-function renderGate(){
-  const host = $("gateQs"); host.innerHTML = "";
-  let n = 0;
-  QUESTIONS.forEach(Q=>{
-    if(Q.skipIf && Q.skipIf(state.q)) return;
-    n++;
-    const div = document.createElement("div"); div.className = "q";
-    let h = `<div class="qt">Q${n}. ${Q.t}</div>`;
-    if(Q.list) h += `<ul>${Q.list.map(x=>`<li>${x}</li>`).join("")}</ul>`;
-    if(Q.h) h += `<div class="qh">${Q.h}</div>`;
-    h += `<div class="yn" role="radiogroup" aria-label="Q${n}">
-      <label><input type="radio" name="${Q.id}" value="y"${state.q[Q.id]==="y"?" checked":""}>예</label>
-      <label><input type="radio" name="${Q.id}" value="n"${state.q[Q.id]==="n"?" checked":""}>아니오</label></div>`;
-    div.innerHTML = h; host.appendChild(div);
-  });
-  host.querySelectorAll("input[type=radio]").forEach(r=>r.addEventListener("change",e=>{
-    state.q[e.target.name] = e.target.value; save(); renderGate(); renderRest();
-  }));
+function showTab(id){
+  state.tab = id; save();
+  TABS.forEach(([t])=>$("panel-"+t).classList.toggle("hidden", t!==id));
+  renderTabs(); if(id==="s2") renderS2();
+  window.scrollTo({top:0});
 }
 
-function renderSummary(){
-  const t = decide(), box = $("summary");
-  let h = `<h2>3. 판정 결과</h2>`;
-  if(t==="X") h += `<div class="stopbox">도급에 해당하지 않을 가능성이 있어 이 체크리스트의 대상이 아닙니다.<br><span style="font-weight:400">근로자를 사용하지 않는 사업자와 계약하는 경우에도 중대재해처벌법상 안전·보건 확보 의무가 있을 수 있습니다(매뉴얼 p.5). 판단이 어려우면 시설안전팀에 문의하세요.</span></div>`;
-  else if(t==="STOP") h += `<div class="stopbox">도급이 금지되거나 승인이 필요한 작업입니다.<br><span style="font-weight:400">계약을 진행하기 전에 반드시 시설안전팀과 협의하세요(매뉴얼 p.4).</span></div>`;
-  else if(TRACKS[t]){
-    const items = visibleItems().filter(i=>!isExempt(i));
-    const done = items.filter(i=>state.checks[i.id]).length;
-    const pct = items.length? Math.round(done*100/items.length):0;
-    h += `<div class="result"><b>${TRACKS[t].n}</b><div>${TRACKS[t].d}</div>
-      ${ctx().cons?`<div class="note">건설공사에 해당할 수 있습니다. 건설공사 해당 여부·총괄관리 지위 판단(매뉴얼 p.4~8)은 시설안전팀과 협의하세요. 점검 주기는 건설업 기준으로 표시됩니다.</div>`:""}
-      ${state.q.q7==="y"?`<div class="note">일시적·간헐적 작업이라 안전보건협의체 구성·운영은 예외 대상입니다(점선 항목).</div>`:""}
-      <div style="margin-top:6px">진행: <b>${done} / ${items.length}</b> (${pct}%)</div>
-      <div class="bar"><i style="width:${pct}%"></i></div></div>`;
-  } else h += `<div class="sub">위 질문에 모두 답하면 해야 할 항목이 나타납니다.</div>`;
-  box.innerHTML = h;
+function printCard(id){
+  const el = $(id); el.classList.add("print-target"); document.body.classList.add("printing-form");
+  const done = ()=>{ el.classList.remove("print-target"); document.body.classList.remove("printing-form"); window.removeEventListener("afterprint",done); };
+  window.addEventListener("afterprint",done); window.print();
 }
 
-function renderSched(){
-  const box = $("schedBox"), t = decide();
-  const s = state.info.start, e = state.info.end;
-  if(!(t==="B"||t==="C") || !s || !e){ box.classList.add("hidden"); return; }
-  const d1 = new Date(s+"T00:00:00"), d2 = new Date(e+"T00:00:00");
-  if(isNaN(d1)||isNaN(d2)||d2<d1){ box.classList.add("hidden"); return; }
-  box.classList.remove("hidden");
-  const days = Math.round((d2-d1)/86400000)+1, cons = ctx().cons;
-  const iv = cons?2:7, cnt = Math.ceil(days/iv);
-  const fmt = d=>`${d.getMonth()+1}/${d.getDate()}`;
-  const ds=[]; for(let i=0;i<cnt && ds.length<14;i++){ ds.push(fmt(new Date(d1.getTime()+i*iv*86400000))); }
-  const jIv = cons?61:91, jc = Math.floor(days/jIv);
-  const months = Math.max(1,Math.ceil(days/30));
-  box.innerHTML = `<h2>점검 일정 참고 <small class="sub">작업기간 ${s} ~ ${e} (${days}일)</small></h2>
-   <table><tr><th>순회점검</th><td>${cons?"2일에 1회":"1주일에 1회"} 이상 → 약 <b>${cnt}회</b><br><span class="sub">예시 일자: ${ds.join(", ")}${cnt>ds.length?" …":""}<br>실제 작업이 있는 날로 조정하세요.</span></td></tr>
-   <tr><th>합동점검</th><td>${cons?"2개월":"분기"}에 1회 이상 → 작업기간 중 주기 도래 <b>${jc}회</b>${jc===0?"<br><span class=\"sub\">단기 사업입니다. 설치 완료 전 1회 실시를 권장합니다(확인 필요).</span>":""}</td></tr>
-   <tr><th>협의체 회의</th><td>${state.q.q7==="y"?"예외 대상(일시적·간헐적 작업). 작업 전 1회 협의 권장":`착수 전 1회 + 매월 1회 이상 → 약 <b>${months}회</b>`}</td></tr></table>`;
-}
-
-function renderList(){
-  const host = $("list"); host.innerHTML = "";
-  const items = visibleItems(), t = decide();
-  if(!items.length){
-    if(TRACKS[t]===undefined) { host.innerHTML = `<div class="empty">${t?"":"분류 질문에 답하면 체크리스트가 나타납니다."}</div>`; }
-    return;
+$("b_reset").addEventListener("click",()=>{
+  if(!confirm("현재 선택과 체크 내용을 모두 지우고 새 계약을 시작할까요?\n(필요하면 먼저 「파일로 저장」하세요)")) return;
+  state = freshState(); save(); renderS1(); renderS2(); showTab("s1");
+});
+$("b_save").addEventListener("click",()=>{
+  const blob = new Blob([JSON.stringify(state,null,1)],{type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
+  const nm = (state.rec||"계약").replace(/[\\/:*?"<>|]/g,"_").slice(0,40);
+  a.download = `체크리스트_${nm}.json`; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+});
+$("b_load").addEventListener("click",()=>$("f_load").click());
+$("f_load").addEventListener("change",e=>{
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = ()=>{ try{ adopt(JSON.parse(r.result)); save(); renderS1(); renderS2(); showTab(state.tab); }
+    catch(err){ alert("불러올 수 없는 파일입니다."); } };
+  r.readAsText(f); e.target.value = "";
+});
+$("b_copy").addEventListener("click",async()=>{
+  const m = $("copyMsg");
+  try{ await navigator.clipboard.writeText(CLAUSE); m.textContent = "복사했습니다."; }
+  catch(e){
+    const ta = document.createElement("textarea"); ta.value = CLAUSE; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); m.textContent = "복사했습니다."; }catch(_){ m.textContent = "복사하지 못했습니다. 문구를 직접 선택해 복사하세요."; }
+    ta.remove();
   }
-  const C = ctx();
-  STAGES.forEach(S=>{
-    const its = items.filter(i=>i.st===S.id); if(!its.length) return;
-    const sec = document.createElement("div"); sec.className="stage";
-    sec.innerHTML = `<h2>${S.t} <small>${S.s}</small></h2>`;
-    its.forEach(it=>{
-      const v = state.checks[it.id]||0, ex = isExempt(it);
-      const el = document.createElement("div");
-      el.className = "item"+(v?" done":"")+(ex?" exempt":"");
-      const title = typeof it.t==="function"? it.t(C): it.t;
-      const detail = it.d(C);
-      let chips = `<span class="chip ${it.type}">${TYPE_LABEL[it.type]}</span>`;
-      if(it.who===who2) chips += `<span class="chip team">시설안전팀 담당</span>`;
-      if(it.opt||it.showIf) chips += `<span class="chip cond">해당 시</span>`;
-      if(ex) chips += `<span class="chip cond">예외 적용 — 생략 가능</span>`;
-      if(it.proof && it.proof!=="-") chips += `<span class="chip proof">증빙: ${it.proof}</span>`;
-      el.innerHTML = `<div class="chkw"><input type="checkbox" aria-label="완료" ${v?"checked":""}></div>
-        <div class="body"><div class="ttl">${title}</div><div class="chips">${chips}</div>
-        <button type="button" class="more">자세히 보기</button>
-        <div class="detail">${detail}<p class="ref">근거: ${it.ref}</p>${SHOW_REVIEW_NOTES&&it.rv?`<div class="review">⚠ 확인 필요(초안 검토용): ${it.rv}</div>`:""}</div></div>
-        ${it.opt?`<button type="button" class="btn na ${v===2?"on":""}">해당 없음</button>`:""}`;
-      const cb = el.querySelector("input[type=checkbox]");
-      cb.addEventListener("change",()=>{ state.checks[it.id] = cb.checked?1:0; save(); renderSummary(); renderList(); });
-      const more = el.querySelector(".more"), dt = el.querySelector(".detail");
-      more.addEventListener("click",()=>{ const o = dt.classList.toggle("open"); more.textContent = o?"접기":"자세히 보기"; });
-      const na = el.querySelector(".na");
-      if(na) na.addEventListener("click",()=>{ state.checks[it.id] = (state.checks[it.id]===2)?0:2; save(); renderSummary(); renderList(); });
-      sec.appendChild(el);
-    });
-    host.appendChild(sec);
-  });
-}
-
-function renderRest(){ renderSummary(); renderSched(); renderList(); }
+  setTimeout(()=>{ m.textContent=""; },2500);
+});
 
 /* ---------- 양식 렌더 ---------- */
 function field(type,ph){
@@ -649,82 +646,17 @@ function renderForms(){
       h += `<tr><th>${f.table.label}</th><td><table class="ftable" style="margin:0"><tr>${f.table.cols.map(c=>`<th style="width:auto">${c}</th>`).join("")}</tr>${
         Array.from({length:f.table.n}).map(()=>`<tr>${f.table.cols.map(()=>`<td><input type="text"></td>`).join("")}</tr>`).join("")}</table></td></tr>`;
     }
-    if(f.checks){
-      h += `<tr><th>${f.checks.label}</th><td>${f.checks.opts.map(o=>`<label class="cb"><input type="checkbox"> ${o}</label>`).join("")}</td></tr>`;
-    }
+    if(f.checks) h += `<tr><th>${f.checks.label}</th><td>${f.checks.opts.map(o=>`<label class="cb"><input type="checkbox"> ${o}</label>`).join("")}</td></tr>`;
     (f.rows2||[]).forEach(r=>{ h += `<tr><th>${r[0]}</th><td>${field(r[1],r[2])}</td></tr>`; });
     h += `</table><div class="sign">${f.sign.map(s=>`<div>${s}<br>성명: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (서명)</div>`).join("")}</div>
       <div class="toolbar noprint"><button class="btn" type="button" data-print="${f.id}">이 양식 인쇄 / PDF</button></div></section>`;
     return h;
   }).join("");
-  host.querySelectorAll("[data-print]").forEach(b=>b.addEventListener("click",()=>printForm(b.dataset.print)));
+  host.querySelectorAll("[data-print]").forEach(b=>b.addEventListener("click",()=>printCard(b.dataset.print)));
 }
-function printForm(id){
-  const el = $(id); el.classList.add("print-target"); document.body.classList.add("printing-form");
-  const done = ()=>{ el.classList.remove("print-target"); document.body.classList.remove("printing-form"); window.removeEventListener("afterprint",done); };
-  window.addEventListener("afterprint",done); window.print();
-}
-
-/* ---------- 입력 연결 ---------- */
-function bindInfo(){
-  const map = {i_name:"name", i_owner:"owner", i_vendor:"vendor", i_ctype:"ctype", i_start:"start", i_end:"end"};
-  Object.keys(map).forEach(id=>{
-    const el = $(id); el.value = state.info[map[id]]||"";
-    el.addEventListener("input",()=>{ state.info[map[id]] = el.value; save(); renderRest(); });
-  });
-}
-function syncInfo(){
-  const map = {i_name:"name", i_owner:"owner", i_vendor:"vendor", i_ctype:"ctype", i_start:"start", i_end:"end"};
-  Object.keys(map).forEach(id=>{ $(id).value = state.info[map[id]]||""; });
-  $("coreOnly").checked = !!state.core;
-}
-
-$("coreOnly").addEventListener("change",e=>{ state.core = e.target.checked; save(); renderRest(); });
-$("b_print").addEventListener("click",()=>window.print());
-$("b_reset").addEventListener("click",()=>{
-  if(!confirm("현재 입력과 체크 내용을 모두 지우고 새 계약을 시작할까요?\n(필요하면 먼저 「파일로 저장」하세요)")) return;
-  state = {info:{name:"",owner:"",vendor:"",ctype:"",start:"",end:""}, q:{}, checks:{}, core:false};
-  save(); syncInfo(); renderGate(); renderRest();
-});
-$("b_save").addEventListener("click",()=>{
-  const blob = new Blob([JSON.stringify(state,null,1)],{type:"application/json"});
-  const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-  const nm = (state.info.name||"계약").replace(/[\\/:*?"<>|]/g,"_").slice(0,40);
-  a.download = `체크리스트_${nm}.json`; document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-});
-$("b_load").addEventListener("click",()=>$("f_load").click());
-$("f_load").addEventListener("change",e=>{
-  const f = e.target.files[0]; if(!f) return;
-  const r = new FileReader();
-  r.onload = ()=>{ try{
-      const o = JSON.parse(r.result);
-      state = {info:Object.assign({name:"",owner:"",vendor:"",ctype:"",start:"",end:""}, o.info||{}), q:o.q||{}, checks:o.checks||{}, core:!!o.core};
-      save(); syncInfo(); renderGate(); renderRest();
-    }catch(err){ alert("불러올 수 없는 파일입니다."); } };
-  r.readAsText(f); e.target.value = "";
-});
-$("b_copy").addEventListener("click",async()=>{
-  const m = $("copyMsg");
-  try{ await navigator.clipboard.writeText(CLAUSE); m.textContent = "복사했습니다."; }
-  catch(e){
-    const ta = document.createElement("textarea"); ta.value = CLAUSE; document.body.appendChild(ta); ta.select();
-    try{ document.execCommand("copy"); m.textContent = "복사했습니다."; }catch(_){ m.textContent = "복사하지 못했습니다. 문구를 직접 선택해 복사하세요."; }
-    ta.remove();
-  }
-  setTimeout(()=>{ m.textContent=""; },2500);
-});
-
-function showTab(which){
-  const c = which==="check";
-  $("panel-check").classList.toggle("hidden",!c); $("panel-forms").classList.toggle("hidden",c);
-  $("t_check").setAttribute("aria-selected",c); $("t_forms").setAttribute("aria-selected",!c);
-}
-$("t_check").addEventListener("click",()=>showTab("check"));
-$("t_forms").addEventListener("click",()=>showTab("forms"));
 
 /* ---------- 시작 ---------- */
-load(); bindInfo(); syncInfo(); renderGate(); renderRest(); renderForms();
+load(); renderForms(); renderS1(); renderS2(); renderTabs(); showTab(state.tab);
 </script>
 </body>
 </html>
