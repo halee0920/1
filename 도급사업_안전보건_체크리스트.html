@@ -14,6 +14,7 @@
   --team:#6a3fa0; --team-soft:#f0e9f9;
   --warn:#7a5200; --warn-soft:#fff3d1;
   --ok:#12703f; --ok-soft:#e3f4ea;
+  --vend:#9a4a00; --vend-soft:#fff0dc;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -25,6 +26,7 @@
     --team:#c9a6f5; --team-soft:#2c2140;
     --warn:#ffd277; --warn-soft:#3a2f12;
     --ok:#6fd49c; --ok-soft:#18301f;
+    --vend:#ffb86b; --vend-soft:#3a2810;
   }
 }
 *{box-sizing:border-box}
@@ -128,11 +130,26 @@ details .dbody ul{margin:4px 0 4px 18px;padding:0}
 .sign div{flex:1 1 200px;border-top:1px solid var(--mute);padding-top:4px;font-size:13px}
 .clause{white-space:pre-wrap;font-size:13.5px;background:var(--bg);border-radius:6px;padding:12px;border:1px solid var(--line);font-family:inherit}
 footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
+.chip.who-m{background:var(--brand-soft);color:var(--brand)}
+.chip.who-v{background:var(--vend-soft);color:var(--vend)}
+.chip.who-t{background:var(--team-soft);color:var(--team)}
+.vend{font-size:13px;background:var(--vend-soft);color:var(--vend);border-radius:6px;padding:5px 10px;margin-top:6px}
+.docs{margin-top:6px;display:flex;flex-direction:column;gap:5px}
+.doc{display:flex;gap:6px 8px;flex-wrap:wrap;align-items:center;font-size:13px;border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--bg)}
+.doc .dn{font-weight:600}
+.fbtn{display:inline-block;font-size:12px;line-height:1.5;padding:1px 9px;border:1px solid var(--brand);color:var(--brand);border-radius:5px;text-decoration:none;background:var(--card);white-space:nowrap}
+a.fbtn:hover{background:var(--brand-soft)}
+.fbtn.off{border-color:var(--line);color:var(--mute)}
+.fwrap{overflow-x:auto}
+.ftab{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+.ftab th,.ftab td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.ftab th{background:var(--bg);font-weight:600}
+.ftab .fb{display:flex;gap:4px;flex-wrap:wrap}
 .hidden{display:none!important}
 @media print{
   body{background:#fff;color:#000;font-size:12px}
   .page{max-width:none;padding:0}
-  .tabs,.toolbar,.noprint,.more,.na,button,.legend,.yn{display:none!important}
+  .tabs,.toolbar,.noprint,.more,.na,button,.legend,.yn,.fbtn{display:none!important}
   .detail{display:block!important;background:#fff;border:1px solid #ccc}
   details .dbody{display:block}
   .card,.item{break-inside:avoid;border-color:#999}
@@ -152,7 +169,7 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
 <header class="topbar">
   <div>
     <h1>도급사업 안전보건 체크리스트</h1>
-    <div class="sub">국립중앙과학관 「도급사업 안전보건관리」 운영 매뉴얼(2024.9.30.) 기준 · <b>초안 v0.2</b></div>
+    <div class="sub">국립중앙과학관 「도급사업 안전보건관리」 운영 매뉴얼(2024.9.30.) 기준 · <b>초안 v0.3</b></div>
   </div>
   <div class="toolbar noprint" style="margin:0">
     <button class="btn" id="b_save" type="button">파일로 저장</button>
@@ -171,6 +188,7 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
     <b>1단계. 도급인 확인</b> <span class="sub">(매뉴얼 p.4~8)</span><br>
     이 계약에서 우리 관이 산업안전보건법상 <b>「도급인」</b>인지, <b>「건설공사발주자」</b>인지 판단합니다.
     도급인이면 산안법의 도급 안전·보건 의무가 적용되고, 건설공사발주자이면 산안법 제67조~제73조에 따른 조치를 추진합니다.
+    <div class="chips" style="margin:6px 0"><span class="chip who-m">담당: 사업담당자</span><span class="sub">판단이 어려우면 시설안전팀과 협의합니다</span></div>
     <div class="flow" id="s1flow"></div>
   </div>
   <section class="card" id="s1qs"></section>
@@ -183,6 +201,7 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
   <div class="intro">
     <b>2단계. 적격 수급인 선정</b> <span class="sub">(매뉴얼 p.9~10 · 산안법 제61조)</span><br>
     도급인은 산업재해 예방 조치를 할 수 있는 능력을 갖춘 업체에 도급해야 합니다. <b>업체와 계약하기 전에</b> 아래 순서로 진행합니다.
+    <div class="chips" style="margin:6px 0"><span class="chip who-m">담당: 사업담당자</span><span class="chip who-t">담당: 시설안전팀</span><span class="chip who-v">업체(수급인)가 할 일</span><span class="sub">각 항목마다 누가 하는 일인지 표시합니다</span></div>
     <div class="flow"><span class="on">자료 제시·징구</span><i>→</i><span class="on">최초 안전보건수준평가</span><i>→</i><span class="on">계약(관리비용 계상 등)</span></div>
   </div>
   <div id="s2body"></div>
@@ -192,8 +211,9 @@ footer{font-size:12px;color:var(--mute);margin:26px 0 10px}
 <div class="panel hidden" id="panel-forms">
   <section class="card">
     <h2>양식 모음 <small class="sub">— 매뉴얼에 없는 추가 양식(권장)</small></h2>
-    <div class="sub">매뉴얼의 서식 1~12는 매뉴얼 원문을 사용하세요. 아래 양식은 현장 업무 편의를 위한 제안 양식입니다. 입력 후 「인쇄 / PDF」로 저장하세요. (입력 내용은 저장되지 않습니다)</div>
+    <div class="sub">매뉴얼의 서식 1~12는 아래 표의 원본 서식을 사용하세요. 그 아래 양식은 현장 업무 편의를 위한 제안 양식입니다. 입력 후 「인쇄 / PDF」로 저장하세요. (입력 내용은 저장되지 않습니다)</div>
   </section>
+  <div id="manualForms"></div>
   <section class="card formcard" id="clauseCard">
     <h3>A. 계약서·과업지시서용 안전보건 특약 문구(예시) <span class="chip tip">권장</span></h3>
     <div class="sub noprint">매뉴얼 서식 5(계약 시 명시사항)를 계약서 문장 형태로 풀어 쓴 예시입니다. 계약 담당 부서 검토 후 사용하세요. [ ]는 해당 시에만 남기세요.</div>
@@ -217,26 +237,26 @@ const TYPE_LABEL = {law:"법정", manual:"관 기준", tip:"권장"};
 const $ = id => document.getElementById(id);
 
 /* ================= 1단계: 도급인 확인 ================= */
-const Y3 = [["y","예"],["n","아니오"],["q","잘 모르겠음"]];
+const Y3 = [["y","그렇다"],["n","아니다"],["q","잘 모르겠음"]];
 const S1Q = [
- {id:"q1", n:"1", t:"이 계약은 우리 관의 업무를 업체에 맡겨 물건의 제조·건설·수리 또는 서비스 제공, 그 밖의 업무를 하게 하는 계약인가요?",
+ {id:"q1", n:"1", t:"이 계약은 우리 관의 업무를 업체에 맡겨 물건의 제조·건설·수리 또는 서비스 제공, 그 밖의 업무를 하게 하는 계약이다.",
   h:"계약 명칭과 관계없고, 일의 완성이나 대가 지급 여부와도 관계없습니다.", opts:Y3,
   det:`<p><b>도급</b>이란 명칭에 관계없이 물건의 제조·건설·수리 또는 서비스의 제공, 그 밖의 업무를 타인에게 맡기는 계약입니다.</p>
    <ul><li>도급 대상 업무는 모두 도급인(우리 관) 자신의 업무로 봅니다. 사업 목적과 직접 관련이 없어도 도급에 포함됩니다.</li>
    <li>예) 전시 장치 등 과학관 전시에 관한 정기적·일상적 정비·유지·보수, 경비·조경·청소 등 용역서비스, 구내식당 등 복리후생시설 운영</li></ul>
    <p class="ref">매뉴얼 p.3, 5</p>`},
- {id:"q2", n:"2", t:"계약 상대방(업체)은 근로자를 사용해 사업을 하는 사업주인가요?",
+ {id:"q2", n:"2", t:"이 계약은 근로자를 사용해 사업을 하는 사업주(업체)와 체결하는 계약이다.",
   h:"근로자를 사용하지 않는 개인을 위촉하는 경우(예: 위원회 위원 위촉)는 산안법상 도급으로 보기 어렵습니다.", opts:Y3,
   det:`<p>산안법상 도급은 수급인이 근로자를 사용하여 사업을 하는 사업주임을 전제로 합니다.</p>
    <p>도급이 아닌 경우에도 <b>중대재해처벌법 제9조</b>에 따른 안전 및 보건 확보 의무는 있습니다.</p><p class="ref">매뉴얼 p.5</p>`},
- {id:"q3", n:"3", t:"이 계약에 도급이 금지되거나 승인이 필요한 작업이 포함되나요?", kind:"choice",
-  opts:[["none","해당 없음"],["ban","도급 금지 작업이 포함됨"],["appr","승인 필요 작업이 포함됨"],["q","잘 모르겠음"]],
+ {id:"q3", n:"3", t:"이 계약은 도급이 금지되거나 승인이 필요한 작업이 포함된 계약이다.", kind:"choice",
+  opts:[["none","아니다"],["ban","그렇다 — 도급 금지 작업 포함"],["appr","그렇다 — 승인 필요 작업 포함"],["q","잘 모르겠음"]],
   list:["<b>도급 금지</b>: ① 도금 작업 ② 수은·납 또는 카드뮴을 제련·주조·용접·열처리·가공·취급하는 작업 ③ 산안법 제118조 제1항에 따른 허가대상물질 제조·사용 작업",
         "<b>승인 필요</b>: 중량 비율 1% 이상의 황산·불화수소·질산·염화수소를 취급하는 설비를 작업 또는 해당 설비 내부에서 이뤄지는 작업"],
   h:"전시·행사 계약에서는 드뭅니다.",
   rv:"매뉴얼 p.4 흐름도에는 금지 ②가 '수은, 납 또는 카드뮴의 작업'으로만 적혀 있습니다. 위 ② 문구는 법령 표현을 참고해 풀어 쓴 것이므로 법령 확인 시 점검 필요.",
   det:`<p class="ref">매뉴얼 p.4 (도급 금지·승인 필요 사업 여부 판단)</p>`},
- {id:"q4", n:"4", t:"이 계약에 건설공사가 포함되나요?",
+ {id:"q4", n:"4", t:"이 계약은 건설공사가 포함된 계약이다.",
   h:"공사 금액이 적거나 규모가 작아도, 구조물을 '축조 또는 설치'하는 작업이면 건설공사에 해당할 수 있습니다.", opts:Y3,
   rv:"매뉴얼 p.6에 '다만 다음 각 목의 어느 하나에 해당하는 공사는 포함하지 아니한다'는 문구가 있으나 각 목 내용이 매뉴얼에 없습니다. 원문(건설산업기본법 제2조 제4호) 확인 필요.",
   det:`<p>산안법상 <b>건설공사</b>는 다음 중 어느 하나에 해당하는 공사입니다.</p>
@@ -247,19 +267,19 @@ const S1Q = [
    <li>대법원 2015.4.23. 선고 2013두12386: 공사 금액이 적거나 규모가 작아도 건설업 범위에 속한다고 판시</li></ul>
    <p class="ref">매뉴얼 p.4, 6</p>`}
 ];
-const S1C_INTRO = "건설공사가 포함되는 경우, 우리 관이 건설공사의 <b>총괄·관리 지위</b>에 있는지 아래 4개 기준으로 판단합니다. <b>하나라도 '예'이면 「도급인」</b>, 4개 모두 '아니오'이면 「건설공사발주자」입니다. (매뉴얼 p.7~8)";
+const S1C_INTRO = "건설공사가 포함되는 경우, 우리 관이 건설공사의 <b>총괄·관리 지위</b>에 있는지 아래 4개 기준으로 판단합니다. <b>하나라도 '그렇다'이면 「도급인」</b>, 4개 모두 '아니다'이면 「건설공사발주자」입니다. (매뉴얼 p.7~8)";
 const S1C = [
- {id:"c1", n:"①", t:"도급하는 건설공사가 우리 관 사업의 본질적이고 필수적인 부분에 해당하며, 같은 장소에서 공사 일부는 우리 관이 행하고 나머지 일부는 수급인이 행하나요?",
+ {id:"c1", n:"①", t:"이 계약은 도급하는 건설공사가 우리 관 사업의 본질적이고 필수적인 부분에 해당하며, 같은 장소에서 공사 일부는 우리 관이 행하고 나머지 일부는 수급인이 행하는 계약이다.",
   h:"공사를 직접 하지 않더라도 구체적인 지시를 하는 경우 등은 공사를 행한다고 봅니다. 매뉴얼은 전시물 교체공사, 특별전·기획전 조성 공사, 전시기획에 따른 전시공간 조성 공사를 우리 관 주도로 실시하는 본질적·필수적 부분으로 봅니다.", opts:Y3,
   det:`<p><b>본질적이고 필수적인 부분</b>: 판례(울산지방법원 2021.11.11. 선고 2021고단1782)는 도급인의 주요 생산 기계에 대한 유지·보수 공사처럼 그 건설공사 자체가 도급인 사업의 일부에 해당하는 경우를 본질적·필수적이라고 봤습니다.</p>
    <p><b>우리 관 사례 적용</b>: 우리 관은 과학기술자료를 수집·조사·연구하여 보존·전시하고 과학기술교육프로그램을 개설해 과학기술지식을 보급하는 시설입니다. 따라서 ① 전시물 교체공사 ② 특별전·기획전 조성 공사 ③ 전시기획에 따른 전시공간 조성 공사 등은 우리 관 주도 하에 실시되어야 하는 본질적·필수적 부분(사업)에 해당합니다.</p><p class="ref">매뉴얼 p.7</p>`},
- {id:"c2", n:"②", t:"도급하는 건설공사가 각 전문분야 공사로 이루어지며 같은 장소에서 행해지는데, 우리 관이 각 전문분야 공사의 전부를 직접 도급하고 있나요?",
+ {id:"c2", n:"②", t:"이 계약은 각 전문분야 공사로 이루어진 건설공사를 같은 장소에서 행하게 하면서, 우리 관이 각 전문분야 공사의 전부를 직접 도급하는 계약이다.",
   h:"최초로 도급받은 수급인(원도급)이 없고, 우리 관이 전문분야별로 각각 직접 계약하는 경우입니다.", opts:Y3,
   det:`<p class="ref">매뉴얼 p.7</p>`},
- {id:"c3", n:"③", t:"도급하는 건설공사에 관하여 우리 관의 지배하(실질적으로 지배·운영·관리하는 책임이 있는 경우)에 있는 특수한 위험요소가 있나요?", opts:Y3,
+ {id:"c3", n:"③", t:"이 계약은 도급하는 건설공사에 관하여 우리 관의 지배하(실질적으로 지배·운영·관리하는 책임이 있는 경우)에 있는 특수한 위험요소가 있는 계약이다.", opts:Y3,
   det:`<p><b>실질적으로 지배·운영·관리하는 책임이 있는 경우</b>(고용노동부 해설): 재해 원인을 살펴 해당 시설·장비·장소에 관한 소유권, 임차권, 그 밖에 사실상의 지배력을 가지고 있어 위험에 대한 제어 능력이 있다고 볼 수 있는 경우</p>
    <p><b>판례 속 예시</b>(울산지방법원 2021.11.11. 선고 2021고단1782): 도급한 건설공사의 목적물이 도급인만이 그 위험을 파악하고 적절하게 대처할 수 있는 특수한 위험 설비나 자재가 위치한 공간 내에 있고, 도급인이 주도적으로 시공을 총괄·관리하면서 그 설비나 자재의 폭발, 전도 및 낙하 방지, 근로자 출입 금지 등의 적극적인 조치를 취하지 않고서는 수급인이 독자적으로 그러한 위험을 제거하는 조치를 취하는 것이 불가능한 경우</p><p class="ref">매뉴얼 p.8</p>`},
- {id:"c4", n:"④", t:"우리 관과 수급인의 전문성·규모·계약 내용 등에 비추어, 우리 관은 시공을 주도해 총괄·관리할 능력이 있는 반면 수급인은 산안법이 정한 안전·보건조치를 스스로 이행할 능력이 없음이 우리 관 입장에서 명백한가요?", opts:Y3,
+ {id:"c4", n:"④", t:"이 계약은 우리 관과 수급인의 전문성·규모·계약 내용 등에 비추어, 우리 관은 시공을 주도해 총괄·관리할 능력이 있는 반면 수급인은 산안법이 정한 안전·보건조치를 스스로 이행할 능력이 없음이 우리 관 입장에서 명백한 계약이다.", opts:Y3,
   det:`<p><b>판례 속 예시</b>: 스스로 충분히 건설공사 시공을 주도하여 총괄·관리할 수 있는 능력이 있는 대규모 사업체가, 안전조치를 취하는 것이 불가능함이 명백할 정도의 낮은 금액으로 전문성과 안전조치 능력을 갖추지 못했음이 명백한 영세한 사업체와 도급계약을 체결한 경우</p><p class="ref">매뉴얼 p.8</p>`}
 ];
 const S1ALL = [...S1Q, ...S1C];
@@ -369,6 +389,53 @@ function recordHtml(res, R){
    <div class="toolbar noprint"><button class="btn" type="button" id="recPrint">판단 기록 인쇄 / PDF</button></div></section>`;
 }
 
+/* ================= 매뉴얼 서식 파일 연결 =================
+ 원본 서식 파일을 받으면 아래에 경로를 적으세요. 예) hwp:"서식/서식1_안전보건관리계획서.hwp"
+  - hwp: '한글 파일 다운로드' 버튼에 연결됩니다.
+  - pdf: '서식 확인' 버튼(새 창 미리보기)에 연결됩니다. (선택)
+  - 파일 경로 대신 data: 주소를 넣으면 HTML 파일 하나로 배포할 수 있습니다. */
+const FORM_FILES = {
+ 1:{hwp:"",pdf:""}, 2:{hwp:"",pdf:""}, 3:{hwp:"",pdf:""}, 4:{hwp:"",pdf:""}, 5:{hwp:"",pdf:""}, 6:{hwp:"",pdf:""},
+ 7:{hwp:"",pdf:""}, 8:{hwp:"",pdf:""}, 9:{hwp:"",pdf:""}, 10:{hwp:"",pdf:""}, 11:{hwp:"",pdf:""}, 12:{hwp:"",pdf:""}
+};
+const WHO = {m:{cls:"who-m",t:"사업담당자"}, v:{cls:"who-v",t:"업체(수급인)"}, t:{cls:"who-t",t:"시설안전팀"}};
+/* by: 서식을 작성하는 주체 / flow: 진행 방법 / when: 시기 */
+const MFORMS = {
+ 1:{name:"안전보건관리계획서", p:"p.27", by:"v", flow:"사업담당자가 업체에 제시·징구 → 평가 → 내부 결재", when:"선정 時"},
+ 2:{name:"최초 안전보건수준평가", p:"p.28", by:"m", flow:"업체에 제시 · 평가 시 점수 기입 → 내부 결재", when:"선정 時"},
+ 3:{name:"안전보건수준평가 항목별 세부 평가기준", p:"p.29~31", by:"m", flow:"업체에 제시 · 평가 기준으로 사용 → 내부 결재", when:"선정 時"},
+ 4:{name:"안전보건관리 서약서", p:"p.32", by:"v", flow:"업체 대표자가 작성·서명 → 사업담당자가 징구 → 내부 결재", when:"선정 時"},
+ 5:{name:"계약 시 명시해야 할 사항", p:"p.33~34", by:"m", flow:"계약서에 제시·반영", when:"계약 時"},
+ 6:{name:"안전보건협의체 회의록", p:"p.35", by:"m", flow:"사업담당자가 작성·관리(참석자 확인 서명) → 내부 결재", when:"작업 前·中"},
+ 7:{name:"안전보건협의체 위임장", p:"p.36", by:"m", byTxt:"기관장(위임하는 사람)", flow:"대리인을 지정할 때 작성 → 내부 결재", when:"작업 前·中"},
+ 8:{name:"합동안전보건점검", p:"p.37", by:"m", flow:"사업담당자가 점검 결과 기록 → 내부 결재", when:"작업 中"},
+ 9:{name:"작업장 순회점검", p:"p.38", by:"m", flow:"사업담당자(또는 위임받은 소속 직원)가 점검·기록 → 내부 결재", when:"작업 中"},
+ 10:{name:"특별교육 확인서", p:"p.39", by:"v", flow:"업체가 특별교육 실시를 서약·제출 → 사업담당자가 확인", when:"작업 中"},
+ 11:{name:"경보운영 및 대피방법 등 훈련 일지", p:"p.40", by:"m", byTxt:"사업담당자·업체 공동", flow:"훈련 후 도급인·수급인·관계수급인이 확인 서명", when:"작업 中"},
+ 12:{name:"안전·보건 수준 재평가", p:"p.41", by:"t", flow:"시설안전팀이 재평가·등급 부여 · 사업담당자는 감점 근거 자료 제공", when:"작업 後·정산 時"}
+};
+function fileBtns(no){
+  const f = FORM_FILES[no]||{}; let h = "";
+  if(f.pdf) h += `<a class="fbtn" href="${f.pdf}" target="_blank" rel="noopener">서식 확인</a>`;
+  if(f.hwp) h += `<a class="fbtn" href="${f.hwp}" download>한글 파일 다운로드</a>`;
+  if(!h) h = `<span class="fbtn off" title="원본 파일이 준비되면 연결됩니다">파일 준비 중</span>`;
+  return h;
+}
+function byChip(M){ const w = WHO[M.by]; return `<span class="chip ${w.cls}">작성: ${M.byTxt||w.t}</span>`; }
+function docRow(d){
+  const no = typeof d==="object"? d.no : d, note = typeof d==="object"? d.note : "", M = MFORMS[no];
+  return `<div class="doc"><span class="dn">서식${no} ${M.name}</span>${byChip(M)}${note?`<span class="sub">${note}</span>`:""}<span class="fb">${fileBtns(no)}</span></div>`;
+}
+function formsOverview(nos, title){
+  const rows = nos.map(no=>{ const M = MFORMS[no];
+    return `<tr><td><b>서식${no}</b> ${M.name}<div class="ref">매뉴얼 ${M.p}</div></td><td>${byChip(M)}</td><td>${M.flow}</td><td style="white-space:nowrap">${M.when}</td><td><div class="fb">${fileBtns(no)}</div></td></tr>`; }).join("");
+  const any = nos.some(no=>(FORM_FILES[no]||{}).hwp || (FORM_FILES[no]||{}).pdf);
+  return `<section class="card"><h3>${title}</h3>
+   <div class="sub" style="margin-bottom:6px">'작성' 칸은 그 서식을 누가 작성하는지를 뜻합니다.${any?"":" 원본 한글 서식 파일은 준비되는 대로 연결됩니다."}</div>
+   <div class="fwrap"><table class="ftab"><tr><th>서식</th><th>작성 주체</th><th>진행 방법</th><th>시기</th><th>파일</th></tr>${rows}</table></div>
+   ${SHOW_REVIEW_NOTES && nos.some(n=>n>=6)?`<div class="review">⚠ 확인 필요(초안 검토용): 서식 6~12의 작성 주체·진행 방법은 서식 머리표와 서식 형태로 추정했습니다. 서식12는 머리표상 '사업 담당자'로 표시되어 있으나 재평가는 시설안전팀이 하는 것으로 정리했습니다.</div>`:""}</section>`;
+}
+
 /* ================= 2단계: 적격 수급인 선정 ================= */
 const CTYPES = [["neg","협상에 의한 계약"],["one","1인 견적에 의한 수의계약"],["pay","지출·지급 (1인 견적과 동일)"],["two","2인 견적에 의한 수의계약"],["etc","그 밖의 방법(일반경쟁 등)"]];
 const norm = c => c==="pay" ? "one" : c;
@@ -461,6 +528,24 @@ const S2I = [
   proof:"계약서", ref:"매뉴얼 p.9, 33~34"}
 ];
 
+const S2META = {
+ p01:{who:["m"], docs:[2,3]},
+ p02:{who:["m","t"], role:"사업담당자가 시설안전팀에 메일로 요청 → 시설안전팀이 회신"},
+ p03:{who:["m"]},
+ p04:{who:["m"], docs:[2,3,1], vend:"안전보건관리계획서(서식1)를 작성해 제출합니다."},
+ p05:{who:["m"]},
+ p06:{who:["m","t"], role:"사업담당자가 시설안전팀과 협의"},
+ e01:{who:["m"], docs:[{no:2,note:"사업담당자가 점수 기입"},3]},
+ e02:{who:["m"], vend:"정해진 기한 안에 보완 서류를 제출합니다."},
+ e03:{who:["m"], docs:[2]},
+ e04:{who:["m"]},
+ e05:{who:["m"]},
+ e06:{who:["m"]},
+ c01:{who:["m"]},
+ c02:{who:["m"], docs:[4], vend:"대표자가 서약서(서식4)를 작성하고 서명(날인)해 제출합니다."},
+ c03:{who:["m"], docs:[5], vend:"계약서에 명시된 안전보건 사항을 확인하고 계약을 체결합니다."}
+};
+
 function renderS2(){
   const host = $("s2body");
   const res = s1Result();
@@ -479,6 +564,7 @@ function renderS2(){
   h += `</div>`;
   if(SHOW_REVIEW_NOTES) h += `<div class="review" style="margin-top:8px">⚠ 확인 필요(초안 검토용): 매뉴얼 p.22는 '산업재해 예방조치를 하지 않아도 되는 작업(5개)'도 적격수급인 선정을 이행하도록 하고 있으나, 그 경우의 간소화 기준은 없습니다. 이 체크리스트는 제외 업무도 동일하게 적용합니다.</div>`;
   h += `</section>`;
+  h += formsOverview([1,2,3,4,5], "이 단계에서 쓰는 서식");
   if(!m){ host.innerHTML = h + `<div class="sub" style="margin-top:8px">계약 방법을 선택하면 체크리스트가 나타납니다.</div>`; bindS2(); return; }
   const items = S2I.filter(i=>i.m.includes(m));
   const done = items.filter(i=>state.s2.checks[i.id]).length, pct = items.length? Math.round(done*100/items.length):0;
@@ -495,10 +581,16 @@ function renderS2(){
       const v = state.s2.checks[it.id]||0;
       const el = document.createElement("div"); el.className = "item"+(v?" done":"");
       const title = typeof it.t==="function"? it.t(m,s): it.t;
+      const meta = S2META[it.id]||{who:["m"]};
       let chips = `<span class="chip ${it.type}">${TYPE_LABEL[it.type]}</span>`;
-      if(it.proof && it.proof!=="-") chips += `<span class="chip proof">증빙: ${it.proof}</span>`;
+      (meta.who||["m"]).forEach(w=>{ chips += `<span class="chip ${WHO[w].cls}">담당: ${WHO[w].t}</span>`; });
+      if(!meta.docs && it.proof && it.proof!=="-") chips += `<span class="chip proof">증빙: ${it.proof}</span>`;
+      let extra = "";
+      if(meta.role) extra += `<div class="sub" style="margin-top:4px">${meta.role}</div>`;
+      if(meta.docs) extra += `<div class="docs">${meta.docs.map(docRow).join("")}</div>`;
+      if(meta.vend) extra += `<div class="vend"><b>업체(수급인)가 할 일</b> — ${meta.vend}</div>`;
       el.innerHTML = `<div class="chkw"><input type="checkbox" aria-label="완료" ${v?"checked":""}></div>
-        <div class="body"><div class="ttl">${title}</div><div class="chips">${chips}</div>
+        <div class="body"><div class="ttl">${title}</div><div class="chips">${chips}</div>${extra}
         <button type="button" class="more">자세히 보기</button>
         <div class="detail">${it.d(m,s)}<p class="ref">근거: ${it.ref}</p>${SHOW_REVIEW_NOTES&&it.rv?`<div class="review">⚠ 확인 필요(초안 검토용): ${it.rv}</div>`:""}</div></div>`;
       const cb = el.querySelector("input");
@@ -638,6 +730,7 @@ function field(type,ph){
 }
 function renderForms(){
   $("clauseText").textContent = CLAUSE;
+  $("manualForms").innerHTML = formsOverview([1,2,3,4,5,6,7,8,9,10,11,12], "매뉴얼 서식 (원본) 1~12");
   const host = $("formsHost");
   host.innerHTML = FORMS.map(f=>{
     let h = `<section class="card formcard" id="${f.id}"><h3>${f.t} <span class="chip tip">권장</span></h3><table class="ftable">`;
